@@ -1,0 +1,344 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contagem Regressiva" activePage="countdown">
+  <div class="min-h-screen pt-8 pb-20 px-4 md:px-12 flex flex-col items-center justify-center" style="background-color: #f9f9fe;">
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+
+      <!-- Left Panel: Timer Display -->
+      <div class="md:col-span-8 flex flex-col items-center justify-center relative">
+        <!-- Background Glow -->
+        <div class="absolute -z-10 w-[400px] h-[400px] rounded-full" style="background-color: rgba(144,50,51,0.05); filter: blur(80px);"></div>
+
+        <!-- Progress Ring -->
+        <div class="relative flex items-center justify-center" style="width: clamp(280px, 60vw, 450px); height: clamp(280px, 60vw, 450px);">
+          <svg class="absolute inset-0 w-full h-full -rotate-90">
+            <circle
+              cx="50%" cy="50%"
+              fill="transparent" r="48%"
+              stroke="currentColor" stroke-width="1.5"
+              style="color: rgba(220,192,190,0.2);"
+            ></circle>
+            <circle
+              id="ring-progress"
+              cx="50%" cy="50%"
+              fill="transparent" r="48%"
+              stroke="#903233"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-dasharray="0 10000"
+            ></circle>
+          </svg>
+
+          <div class="flex flex-col items-center text-center z-10">
+            <span id="timer-display" class="font-bold tracking-tighter" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f; font-size: clamp(3.5rem, 14vw, 6rem);">
+              00:25:00
+            </span>
+            <div id="status-badge" class="mt-6 px-6 py-1.5 rounded-full text-xs uppercase tracking-widest font-medium" style="font-family: 'Space Grotesk', sans-serif; background-color: rgba(60,118,63,0.1); color: #235d29; border: 1px solid rgba(35,93,41,0.2);">
+              Pronto para Iniciar
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="mt-12 flex items-center gap-10">
+          <button id="btn-cancel" class="group flex flex-col items-center gap-2">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center text-on-surface transition-transform group-hover:scale-105 active:scale-95" style="background-color: #e7e8ed; color: #191c1f;">
+              <span class="material-symbols-outlined">close</span>
+            </div>
+            <span class="text-[10px] uppercase tracking-wider" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Cancelar</span>
+          </button>
+
+          <button id="btn-start" class="group flex flex-col items-center gap-2">
+            <div class="w-28 h-28 rounded-full flex items-center justify-center shadow-xl transition-transform group-hover:scale-105 active:scale-95 relative overflow-hidden" style="box-shadow: 0 20px 40px rgba(144,50,51,0.3);">
+              <div class="absolute inset-0" style="background: linear-gradient(135deg, #903233, #af4949);"></div>
+              <span id="start-icon" class="material-symbols-outlined text-5xl relative z-10" style="color: #ffffff; font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </div>
+            <span id="start-label" class="text-[10px] uppercase tracking-widest font-bold" style="font-family: 'Space Grotesk', sans-serif; color: #903233;">Iniciar</span>
+          </button>
+
+          <button id="btn-skip" class="group flex flex-col items-center gap-2">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 active:scale-95" style="background-color: #e7e8ed; color: #191c1f;">
+              <span class="material-symbols-outlined">skip_next</span>
+            </div>
+            <span class="text-[10px] uppercase tracking-wider" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Pular</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Panel: Settings Bento -->
+      <div class="md:col-span-4 flex flex-col gap-6">
+
+        <!-- Time Input Card -->
+        <div class="rounded-2xl p-8" style="background-color: #f3f3f8; border: 1px solid rgba(220,192,190,0.3);">
+          <h3 class="font-bold text-sm mb-6 flex items-center gap-2" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">
+            <span class="material-symbols-outlined text-xl" style="color: #903233;">timer_10_alt_1</span>
+            Definir Duração
+          </h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] uppercase text-center" style="font-family: 'Space Grotesk', sans-serif; color: #897270;">Horas</label>
+              <input
+                id="input-hours"
+                type="number" min="0" max="23"
+                class="w-full text-center text-2xl font-bold py-4 rounded-xl border-0 outline-none transition-all"
+                style="font-family: 'Plus Jakarta Sans', sans-serif; background-color: #e7e8ed; color: #191c1f;"
+                value="0"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] uppercase text-center" style="font-family: 'Space Grotesk', sans-serif; color: #897270;">Minutos</label>
+              <input
+                id="input-minutes"
+                type="number" min="0" max="59"
+                class="w-full text-center text-2xl font-bold py-4 rounded-xl border-0 outline-none transition-all"
+                style="font-family: 'Plus Jakarta Sans', sans-serif; background-color: #e7e8ed; color: #191c1f;"
+                value="25"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] uppercase text-center" style="font-family: 'Space Grotesk', sans-serif; color: #897270;">Segundos</label>
+              <input
+                id="input-seconds"
+                type="number" min="0" max="59"
+                class="w-full text-center text-2xl font-bold py-4 rounded-xl border-0 outline-none transition-all"
+                style="font-family: 'Plus Jakarta Sans', sans-serif; background-color: #e7e8ed; color: #191c1f;"
+                value="0"
+              />
+            </div>
+          </div>
+          <button
+            id="btn-set-time"
+            class="mt-6 w-full py-3 rounded-xl font-semibold text-sm transition-all hover:opacity-90 active:scale-95"
+            style="font-family: 'Space Grotesk', sans-serif; background: linear-gradient(135deg, #903233, #af4949); color: #ffffff;"
+          >
+            Definir Tempo
+          </button>
+        </div>
+
+        <!-- Sound Selection Card -->
+        <div class="rounded-2xl p-8" style="background-color: #f3f3f8; border: 1px solid rgba(220,192,190,0.3);">
+          <h3 class="font-bold text-sm mb-6 flex items-center gap-2" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">
+            <span class="material-symbols-outlined text-xl" style="color: #903233;">notification_important</span>
+            Alarme
+          </h3>
+          <div class="flex flex-col gap-3">
+            <button class="alarm-btn active-alarm w-full flex items-center justify-between px-5 py-4 rounded-xl border-l-4 shadow-sm" data-alarm="chime" style="background-color: #ffffff; border-color: #903233;">
+              <span class="text-sm font-medium" style="font-family: 'Space Grotesk', sans-serif; color: #191c1f;">Sino Sutil</span>
+              <span class="material-symbols-outlined" style="color: #903233; font-variation-settings: 'FILL' 1;">check_circle</span>
+            </button>
+            <button class="alarm-btn w-full flex items-center justify-between px-5 py-4 hover:bg-gray-100 transition-colors rounded-xl" data-alarm="bell" style="color: #564241;">
+              <span class="text-sm" style="font-family: 'Space Grotesk', sans-serif;">Sino Clássico</span>
+              <span class="material-symbols-outlined" style="color: #dcc0be;">play_circle</span>
+            </button>
+            <button class="alarm-btn w-full flex items-center justify-between px-5 py-4 hover:bg-gray-100 transition-colors rounded-xl" data-alarm="digital" style="color: #564241;">
+              <span class="text-sm" style="font-family: 'Space Grotesk', sans-serif;">Digital</span>
+              <span class="material-symbols-outlined" style="color: #dcc0be;">play_circle</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="rounded-2xl p-8" style="background-color: #f3f3f8; border: 1px solid rgba(220,192,190,0.3);">
+          <h3 class="font-bold text-sm mb-6 flex items-center gap-2" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">
+            <span class="material-symbols-outlined text-xl" style="color: #903233;">history</span>
+            Predefinições
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <button class="preset-btn px-5 py-2.5 rounded-lg text-xs font-bold hover:brightness-95 transition-all" data-seconds="900" style="font-family: 'Space Grotesk', sans-serif; background-color: #cfe6f2; color: #526772;">15:00</button>
+            <button class="preset-btn px-5 py-2.5 rounded-lg text-xs font-bold hover:brightness-95 transition-all" data-seconds="1500" style="font-family: 'Space Grotesk', sans-serif; background-color: #cfe6f2; color: #526772;">25:00</button>
+            <button class="preset-btn px-5 py-2.5 rounded-lg text-xs font-bold hover:brightness-95 transition-all" data-seconds="2700" style="font-family: 'Space Grotesk', sans-serif; background-color: #cfe6f2; color: #526772;">45:00</button>
+            <button class="preset-btn px-5 py-2.5 rounded-lg text-xs font-bold hover:brightness-95 transition-all" data-seconds="5400" style="font-family: 'Space Grotesk', sans-serif; background-color: #cfe6f2; color: #526772;">01:30:00</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .active-alarm {
+    background-color: #ffffff;
+    border-left: 4px solid #903233;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  input[type="number"]:focus {
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 2px rgba(122,217,172,0.4);
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    opacity: 0.5;
+  }
+</style>
+
+<script>
+  let totalSeconds = 25 * 60;
+  let remainingSeconds = 25 * 60;
+  let running = false;
+  let intervalId: ReturnType<typeof setInterval> | null = null;
+
+  const timerDisplay = document.getElementById('timer-display')!;
+  const statusBadge = document.getElementById('status-badge')!;
+  const startBtn = document.getElementById('btn-start')!;
+  const startIcon = document.getElementById('start-icon')!;
+  const startLabel = document.getElementById('start-label')!;
+  const cancelBtn = document.getElementById('btn-cancel')!;
+  const skipBtn = document.getElementById('btn-skip')!;
+  const inputHours = document.getElementById('input-hours') as HTMLInputElement;
+  const inputMinutes = document.getElementById('input-minutes') as HTMLInputElement;
+  const inputSeconds = document.getElementById('input-seconds') as HTMLInputElement;
+  const setTimeBtn = document.getElementById('btn-set-time')!;
+  const ringProgress = document.getElementById('ring-progress') as SVGCircleElement;
+
+  function formatTime(secs: number): string {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    if (h > 0) {
+      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
+
+  function updateDisplay() {
+    timerDisplay.textContent = formatTime(remainingSeconds);
+    document.title = `${formatTime(remainingSeconds)} - Contagem Regressiva | Chronos Focus`;
+  }
+
+  function updateRing() {
+    const r = ringProgress.r.baseVal.value;
+    const circumference = 2 * Math.PI * r;
+    const progress = totalSeconds > 0 ? (1 - remainingSeconds / totalSeconds) : 0;
+    ringProgress.style.strokeDasharray = `${progress * circumference} ${circumference}`;
+  }
+
+  function setStatus(label: string, color: string, bg: string, border: string) {
+    statusBadge.textContent = label;
+    statusBadge.style.color = color;
+    statusBadge.style.backgroundColor = bg;
+    statusBadge.style.borderColor = border;
+  }
+
+  function setTime(secs: number) {
+    if (running) stopTimer();
+    totalSeconds = secs;
+    remainingSeconds = secs;
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    inputHours.value = h.toString();
+    inputMinutes.value = m.toString();
+    inputSeconds.value = s.toString();
+    updateDisplay();
+    updateRing();
+    setStatus('Pronto para Iniciar', '#235d29', 'rgba(60,118,63,0.1)', 'rgba(35,93,41,0.2)');
+    startIcon.textContent = 'play_arrow';
+    startLabel.textContent = 'Iniciar';
+  }
+
+  function stopTimer() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = null;
+    running = false;
+    startIcon.textContent = 'play_arrow';
+    startLabel.textContent = 'Iniciar';
+  }
+
+  function tick() {
+    if (remainingSeconds <= 0) {
+      stopTimer();
+      setStatus('Tempo Esgotado!', '#ba1a1a', 'rgba(186,26,26,0.1)', 'rgba(186,26,26,0.2)');
+      // Visual feedback
+      timerDisplay.style.color = '#903233';
+      setTimeout(() => { timerDisplay.style.color = '#191c1f'; }, 500);
+      return;
+    }
+    remainingSeconds--;
+    updateDisplay();
+    updateRing();
+
+    if (remainingSeconds <= 10 && remainingSeconds > 0) {
+      setStatus(`Encerrando em ${remainingSeconds}s`, '#903233', 'rgba(144,50,51,0.1)', 'rgba(144,50,51,0.2)');
+    }
+  }
+
+  startBtn.addEventListener('click', () => {
+    if (remainingSeconds <= 0) return;
+    if (running) {
+      stopTimer();
+      setStatus('Pausado', '#564241', 'rgba(86,66,65,0.1)', 'rgba(86,66,65,0.2)');
+      startLabel.textContent = 'Continuar';
+    } else {
+      running = true;
+      startIcon.textContent = 'pause';
+      startLabel.textContent = 'Pausar';
+      setStatus('Sessão Ativa', '#235d29', 'rgba(60,118,63,0.1)', 'rgba(35,93,41,0.2)');
+      intervalId = setInterval(tick, 1000);
+    }
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    setTime(totalSeconds);
+    setStatus('Cancelado', '#564241', 'rgba(86,66,65,0.1)', 'rgba(86,66,65,0.2)');
+    setTimeout(() => setStatus('Pronto para Iniciar', '#235d29', 'rgba(60,118,63,0.1)', 'rgba(35,93,41,0.2)'), 1500);
+  });
+
+  skipBtn.addEventListener('click', () => {
+    stopTimer();
+    remainingSeconds = 0;
+    updateDisplay();
+    updateRing();
+    setStatus('Pulado', '#564241', 'rgba(86,66,65,0.1)', 'rgba(86,66,65,0.2)');
+  });
+
+  setTimeBtn.addEventListener('click', () => {
+    const h = parseInt(inputHours.value) || 0;
+    const m = parseInt(inputMinutes.value) || 0;
+    const s = parseInt(inputSeconds.value) || 0;
+    const total = h * 3600 + m * 60 + s;
+    if (total > 0) setTime(total);
+  });
+
+  document.querySelectorAll('.preset-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const secs = parseInt((btn as HTMLElement).dataset.seconds || '0');
+      setTime(secs);
+    });
+  });
+
+  document.querySelectorAll('.alarm-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.alarm-btn').forEach((b) => {
+        const el = b as HTMLElement;
+        el.classList.remove('active-alarm');
+        el.style.backgroundColor = '';
+        el.style.borderLeft = '';
+        el.style.boxShadow = '';
+        const icon = el.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = 'play_circle';
+          (icon as HTMLElement).style.color = '#dcc0be';
+        }
+      });
+      const el = btn as HTMLElement;
+      el.classList.add('active-alarm');
+      el.style.backgroundColor = '#ffffff';
+      el.style.borderLeft = '4px solid #903233';
+      el.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      const icon = el.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = 'check_circle';
+        (icon as HTMLElement).style.color = '#903233';
+      }
+    });
+  });
+
+  // Initialize
+  updateDisplay();
+  updateRing();
+</script>
