@@ -5,6 +5,7 @@ export interface Props {
 }
 
 const { title, activePage } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
@@ -13,7 +14,7 @@ const { title, activePage } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} - Chronos Focus</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,21 +36,21 @@ const { title, activePage } = Astro.props;
 
         <nav class="hidden md:flex items-center gap-12">
           <a
-            href="/stopwatch"
+            href={`${base}stopwatch`}
             class="transition-colors duration-300"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'stopwatch' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'stopwatch' ? '700' : '400'}; ${activePage === 'stopwatch' ? 'border-bottom: 2px solid #af4949; padding-bottom: 0.25rem;' : ''}`}
           >
             Cronômetro
           </a>
           <a
-            href="/pomodoro"
+            href={`${base}pomodoro`}
             class="transition-colors duration-300"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'pomodoro' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'pomodoro' ? '700' : '400'}; ${activePage === 'pomodoro' ? 'border-bottom: 2px solid #af4949; padding-bottom: 0.25rem;' : ''}`}
           >
             Pomodoro
           </a>
           <a
-            href="/countdown"
+            href={`${base}countdown`}
             class="transition-colors duration-300"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'countdown' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'countdown' ? '700' : '400'}; ${activePage === 'countdown' ? 'border-bottom: 2px solid #af4949; padding-bottom: 0.25rem;' : ''}`}
           >
@@ -69,21 +70,21 @@ const { title, activePage } = Astro.props;
       <div id="mobile-menu" class="hidden md:hidden w-full" style="background-color: #1a0d0d;">
         <div class="flex flex-col px-6 py-4 gap-4">
           <a
-            href="/stopwatch"
+            href={`${base}stopwatch`}
             class="transition-colors duration-300 py-2"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'stopwatch' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'stopwatch' ? '700' : '400'};`}
           >
             Cronômetro
           </a>
           <a
-            href="/pomodoro"
+            href={`${base}pomodoro`}
             class="transition-colors duration-300 py-2"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'pomodoro' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'pomodoro' ? '700' : '400'};`}
           >
             Pomodoro
           </a>
           <a
-            href="/countdown"
+            href={`${base}countdown`}
             class="transition-colors duration-300 py-2"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'countdown' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'countdown' ? '700' : '400'};`}
           >
