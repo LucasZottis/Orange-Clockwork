@@ -124,7 +124,7 @@ import Layout from '../layouts/Layout.astro';
             Alarme
           </h3>
           <div class="flex flex-col gap-3">
-            <button class="alarm-btn active-alarm w-full flex items-center justify-between px-5 py-4 rounded-xl border-l-4 shadow-sm" data-alarm="chime" style="background-color: #ffffff; border-color: #903233;">
+            <button class="alarm-btn active-alarm w-full flex items-center justify-between px-5 py-4 rounded-xl" data-alarm="chime">
               <span class="text-sm font-medium" style="font-family: 'Space Grotesk', sans-serif; color: #191c1f;">Sino Sutil</span>
               <span class="material-symbols-outlined" style="color: #903233; font-variation-settings: 'FILL' 1;">check_circle</span>
             </button>
@@ -172,7 +172,12 @@ import Layout from '../layouts/Layout.astro';
 
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
-    opacity: 0.5;
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
   }
 </style>
 
@@ -181,6 +186,8 @@ import Layout from '../layouts/Layout.astro';
   let remainingSeconds = 25 * 60;
   let running = false;
   let intervalId: ReturnType<typeof setInterval> | null = null;
+  let selectedAlarm = 'chime';
+  let audioCtx: AudioContext | null = null;
 
   const timerDisplay = document.getElementById('timer-display')!;
   const statusBadge = document.getElementById('status-badge')!;
@@ -249,9 +256,59 @@ import Layout from '../layouts/Layout.astro';
     startLabel.textContent = 'Iniciar';
   }
 
+  function playAlarm() {
+    if (!audioCtx) return;
+    const ctx = audioCtx;
+    if (selectedAlarm === 'chime') {
+      [523.25, 659.25, 783.99].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        const t = ctx.currentTime + i * 0.2;
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(0.35, t + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 2.5);
+        osc.start(t);
+        osc.stop(t + 2.6);
+      });
+    } else if (selectedAlarm === 'bell') {
+      for (let i = 0; i < 3; i++) {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 440;
+        osc.type = 'sine';
+        const t = ctx.currentTime + i * 0.7;
+        gain.gain.setValueAtTime(0.5, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+        osc.start(t);
+        osc.stop(t + 0.7);
+      }
+    } else if (selectedAlarm === 'digital') {
+      for (let i = 0; i < 4; i++) {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 1000;
+        osc.type = 'square';
+        const t = ctx.currentTime + i * 0.3;
+        gain.gain.setValueAtTime(0.25, t);
+        gain.gain.setValueAtTime(0, t + 0.15);
+        osc.start(t);
+        osc.stop(t + 0.2);
+      }
+    }
+  }
+
   function tick() {
     if (remainingSeconds <= 0) {
       stopTimer();
+      playAlarm();
       setStatus('Tempo Esgotado!', '#ba1a1a', 'rgba(186,26,26,0.1)', 'rgba(186,26,26,0.2)');
       // Visual feedback
       timerDisplay.style.color = '#903233';
@@ -268,6 +325,8 @@ import Layout from '../layouts/Layout.astro';
   }
 
   startBtn.addEventListener('click', () => {
+    if (!audioCtx) audioCtx = new AudioContext();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
     if (remainingSeconds <= 0) return;
     if (running) {
       stopTimer();
@@ -316,24 +375,21 @@ import Layout from '../layouts/Layout.astro';
       document.querySelectorAll('.alarm-btn').forEach((b) => {
         const el = b as HTMLElement;
         el.classList.remove('active-alarm');
-        el.style.backgroundColor = '';
-        el.style.borderLeft = '';
-        el.style.boxShadow = '';
         const icon = el.querySelector('.material-symbols-outlined');
         if (icon) {
           icon.textContent = 'play_circle';
           (icon as HTMLElement).style.color = '#dcc0be';
+          (icon as HTMLElement).style.fontVariationSettings = '';
         }
       });
       const el = btn as HTMLElement;
       el.classList.add('active-alarm');
-      el.style.backgroundColor = '#ffffff';
-      el.style.borderLeft = '4px solid #903233';
-      el.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      selectedAlarm = el.dataset.alarm || 'chime';
       const icon = el.querySelector('.material-symbols-outlined');
       if (icon) {
         icon.textContent = 'check_circle';
         (icon as HTMLElement).style.color = '#903233';
+        (icon as HTMLElement).style.fontVariationSettings = "'FILL' 1";
       }
     });
   });
