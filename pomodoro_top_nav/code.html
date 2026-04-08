@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronos Focus - Mindful Pomodoro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500&amp;family=Newsreader:ital,wght@0,700;1,700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#526772",
+                    "on-primary-fixed": "#410006",
+                    "surface-bright": "#f9f9fe",
+                    "tertiary": "#235d29",
+                    "inverse-on-surface": "#f0f0f5",
+                    "surface-variant": "#e2e2e7",
+                    "secondary-fixed-dim": "#b4cad6",
+                    "secondary-fixed": "#cfe6f2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#002105",
+                    "on-secondary-fixed": "#071e27",
+                    "surface-container-high": "#e7e8ed",
+                    "on-primary-fixed-variant": "#812729",
+                    "tertiary-container": "#3c763f",
+                    "on-tertiary-fixed-variant": "#16521f",
+                    "tertiary-fixed": "#b2f2ae",
+                    "primary": "#903233",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#ffdad8",
+                    "primary-container": "#af4949",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e2e2e7",
+                    "inverse-primary": "#ffb3b0",
+                    "surface-container": "#ededf2",
+                    "on-tertiary-container": "#bafbb6",
+                    "on-primary-container": "#ffe5e4",
+                    "tertiary-fixed-dim": "#97d694",
+                    "primary-fixed-dim": "#ffb3b0",
+                    "surface": "#f9f9fe",
+                    "on-surface-variant": "#564241",
+                    "surface-dim": "#d9dade",
+                    "on-surface": "#191c1f",
+                    "secondary": "#4c616c",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#354a53",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f3f3f8",
+                    "on-secondary": "#ffffff",
+                    "outline": "#897270",
+                    "outline-variant": "#dcc0be",
+                    "background": "#f9f9fe",
+                    "surface-tint": "#a03e3e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "newsreader": ["Newsreader"],
+                    "manrope": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .timer-glow {
+            box-shadow: 0 40px 80px -20px rgba(144, 50, 51, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="h-20 w-full sticky top-0 z-50 bg-[#150c0c] dark:bg-[#150c0c]">
+<div class="flex justify-between items-center px-12 w-full max-w-screen-2xl mx-auto h-full">
+<div class="font-newsreader text-2xl font-bold italic text-[#f1dedd]">Chronos Focus</div>
+<nav class="hidden md:flex items-center gap-12">
+<a class="text-[#f1dedd]/70 font-manrope text-sm uppercase tracking-widest hover:text-[#ffb3b0] transition-colors duration-300" href="#">Stopwatch</a>
+<a class="text-[#ffb3b0] font-bold border-b-2 border-[#af4949] pb-1 font-manrope text-sm uppercase tracking-widest" href="#">Pomodoro</a>
+<a class="text-[#f1dedd]/70 font-manrope text-sm uppercase tracking-widest hover:text-[#ffb3b0] transition-colors duration-300" href="#">Countdown</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="p-2 text-[#f1dedd]/70 hover:text-[#ffb3b0] active:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-[#f1dedd]/70 hover:text-[#ffb3b0] active:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="min-h-screen pt-12 pb-24 px-6 md:px-12 flex flex-col items-center">
+<!-- Mode Switcher -->
+<div class="inline-flex p-1 bg-surface-container-low rounded-xl mb-16 font-label">
+<button class="px-6 py-2.5 rounded-lg text-sm font-semibold bg-surface-container-lowest text-primary shadow-sm transition-all">Pomodoro</button>
+<button class="px-6 py-2.5 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container-high transition-all">Short Break</button>
+<button class="px-6 py-2.5 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container-high transition-all">Long Break</button>
+</div>
+<!-- Hero Timer Section -->
+<div class="relative w-full max-w-3xl flex flex-col items-center">
+<!-- Asymmetric Editorial Background Decor -->
+<div class="absolute -top-12 -left-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="absolute top-24 -right-12 w-80 h-80 bg-tertiary/5 rounded-full blur-3xl -z-10"></div>
+<div class="text-center mb-8">
+<h1 class="font-headline text-3xl font-bold text-on-surface mb-2 tracking-tight">Deep Work Session</h1>
+<div class="flex items-center justify-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label text-xs font-bold text-on-surface-variant tracking-widest uppercase">Phase 1 of 4</span>
+</div>
+</div>
+<!-- Main Timer Container -->
+<div class="relative w-full aspect-square md:aspect-[4/3] flex items-center justify-center bg-surface-container-low rounded-[48px] overflow-hidden">
+<!-- SVG Progress Ring -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90 p-8">
+<circle class="text-outline-variant opacity-20" cx="50%" cy="50%" fill="none" r="45%" stroke="currentColor" stroke-width="2"></circle>
+<circle class="transition-all duration-1000" cx="50%" cy="50%" fill="none" r="45%" stroke="url(#timerGradient)" stroke-dasharray="100 100" stroke-width="2"></circle>
+<defs>
+<lineargradient id="timerGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:var(--tw-color-primary)"></stop>
+<stop offset="100%" style="stop-color:var(--tw-color-primary-container)"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex flex-col items-center z-10">
+<div class="font-headline text-[8rem] md:text-[12rem] font-bold leading-none tracking-tighter text-on-surface flex items-baseline">
+                    25<span class="text-primary-container opacity-40">:</span>00
+                </div>
+</div>
+</div>
+<!-- Controls -->
+<div class="mt-12 flex items-center gap-8">
+<button class="p-4 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all active:scale-90">
+<span class="material-symbols-outlined text-3xl" data-icon="refresh">refresh</span>
+</button>
+<button class="group relative px-12 py-6 bg-gradient-to-br from-primary to-primary-container rounded-full text-on-primary font-headline text-2xl font-bold shadow-xl hover:scale-105 transition-all active:scale-95 flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                START
+            </button>
+<button class="p-4 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all active:scale-90">
+<span class="material-symbols-outlined text-3xl" data-icon="skip_next">skip_next</span>
+</button>
+</div>
+</div>
+<!-- Task Focus Section (Bento Grid) -->
+<div class="mt-24 w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-[32px] border-l-4 border-tertiary">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary font-bold">Current Focus</span>
+<h2 class="font-headline text-2xl font-bold text-on-surface mt-1">Design System Architecture</h2>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="edit">edit</span>
+</button>
+</div>
+<p class="text-on-surface-variant body-lg leading-relaxed max-w-lg">
+                Refining the spatial tokens and elevation layers for the Chronos Focus platform. Ensure alignment with the editorial aesthetic.
+            </p>
+</div>
+<div class="md:col-span-4 bg-surface-container-low p-8 rounded-[32px] flex flex-col justify-between">
+<div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Today's Goal</span>
+<div class="font-headline text-4xl font-bold text-on-surface mt-2">8<span class="text-xl text-on-surface-variant ml-2">Sessions</span></div>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-4">
+<div class="bg-primary w-1/4 h-full rounded-full"></div>
+</div>
+</div>
+<!-- Up Next Cards -->
+<div class="md:col-span-4 bg-surface-container-high/50 p-6 rounded-[32px]">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Up Next</span>
+<div class="mt-4 space-y-4">
+<div class="flex items-center gap-4 group">
+<div class="w-2 h-2 rounded-full bg-outline-variant group-hover:bg-primary transition-colors"></div>
+<span class="text-on-surface font-medium truncate">Component Library Audit</span>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-2 h-2 rounded-full bg-outline-variant group-hover:bg-primary transition-colors"></div>
+<span class="text-on-surface font-medium truncate">Style Documentation</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 overflow-hidden rounded-[32px] relative group h-48">
+<img class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Minimalist workspace with a laptop, ceramic mug, and a single green plant in soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARcG9wzifbUE-I2Xxo_ZC3hNNVyJD9kZQPzoZH8zdjpp2dJ2RuFbmcejztw82itoukYZS0vVZ_hMgRRb0K_bUCh31EbXyCTkCzbRItjoByrKOb0HNBP7dzzjmwVgpxKJvU4zkWa23BVCH4JCYdqwyZ2VM2GCdw1V8WOWDBRnleerslgm-8-iLo6C0RyJRV5f9V7-_70VCZblzLgXg-NM-DcjsjqmOW8O7xixb7dOasGDU74EXWNjb7IHgS7fMDhIWJAraV9Vpk2BQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent flex items-end p-8">
+<div class="font-label text-xs tracking-widest text-on-surface italic">"Focus is a matter of deciding what things you're not going to do."</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-[#1a1111] dark:bg-[#1a1111] border-t border-[#f1dedd]/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 gap-6 w-full max-w-screen-2xl mx-auto">
+<div class="flex gap-8 font-manrope text-xs tracking-wide">
+<a class="text-[#f1dedd]/50 hover:text-[#f1dedd] transition-opacity" href="#">Privacy Policy</a>
+<a class="text-[#f1dedd]/50 hover:text-[#f1dedd] transition-opacity" href="#">Terms of Service</a>
+<a class="text-[#f1dedd]/50 hover:text-[#f1dedd] transition-opacity" href="#">Support</a>
+</div>
+<p class="text-[#f1dedd]/50 font-manrope text-xs tracking-wide">
+            © 2024 Chronos Focus. The Obsidian Gallery.
+        </p>
+</div>
+</footer>
+</body></html>
