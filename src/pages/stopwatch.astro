@@ -1,0 +1,279 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Cronômetro" activePage="stopwatch">
+  <div class="flex-1 flex flex-col w-full" style="background-color: #f9f9fe;">
+    <div class="flex-1 flex flex-col items-center justify-center p-8 max-w-6xl mx-auto w-full gap-12 py-16">
+
+      <!-- Timer Display Section -->
+      <section class="w-full flex flex-col items-center justify-center relative">
+        <!-- Background Subtle Glow -->
+        <div class="absolute -z-10 w-[500px] h-[500px] rounded-full" style="background-color: rgba(144,50,51,0.05); filter: blur(100px);"></div>
+
+        <div class="relative flex flex-col items-center">
+          <!-- Progress Ring -->
+          <svg id="progress-ring" class="absolute pointer-events-none -rotate-90" style="inset: -4rem; width: calc(100% + 8rem); height: calc(100% + 8rem);">
+            <circle
+              cx="50%" cy="50%"
+              fill="transparent" r="48%"
+              stroke="currentColor" stroke-width="2"
+              style="color: rgba(220,192,190,0.2);"
+            ></circle>
+            <circle
+              id="ring-progress"
+              cx="50%" cy="50%"
+              fill="transparent" r="48%"
+              stroke="#903233"
+              stroke-width="2"
+              stroke-dasharray="0 10000"
+              stroke-linecap="round"
+            ></circle>
+          </svg>
+
+          <div class="text-center">
+            <span class="font-semibold tracking-widest uppercase text-xs mb-4 block" style="font-family: 'Space Grotesk', sans-serif; color: #903233;">Sessão Atual</span>
+            <h1 id="timer-display" class="font-extrabold tracking-tighter leading-none select-none" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f; font-size: clamp(5rem, 18vw, 10rem);">
+              00:00:00<span id="ms-display" class="text-primary-container/40" style="font-size: clamp(2rem, 6vw, 4rem); font-family: 'Space Grotesk', sans-serif; color: rgba(175,73,73,0.4);">.00</span>
+            </h1>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="mt-16 flex items-center gap-8">
+          <button id="btn-reset" class="group flex flex-col items-center gap-2">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background-color: #e7e8ed; color: #564241;">
+              <span class="material-symbols-outlined">replay</span>
+            </div>
+            <span class="text-[10px] uppercase tracking-widest opacity-60" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Reiniciar</span>
+          </button>
+
+          <button id="btn-start" class="w-28 h-28 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 relative overflow-hidden" style="box-shadow: 0 20px 40px rgba(144,50,51,0.3);">
+            <div class="absolute inset-0" style="background: linear-gradient(135deg, #903233, #af4949);"></div>
+            <span id="start-icon" class="material-symbols-outlined text-4xl relative z-10" style="color: #ffffff; font-variation-settings: 'FILL' 1;">play_arrow</span>
+          </button>
+
+          <button id="btn-lap" class="group flex flex-col items-center gap-2">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background-color: #e7e8ed; color: #564241;">
+              <span class="material-symbols-outlined">flag</span>
+            </div>
+            <span class="text-[10px] uppercase tracking-widest opacity-60" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Volta</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Laps and Insights Bento Grid -->
+      <section class="w-full grid grid-cols-1 md:grid-cols-12 gap-6 mt-8">
+
+        <!-- Lap Times -->
+        <div class="md:col-span-8 rounded-[2rem] p-8 flex flex-col gap-6" style="background-color: #f3f3f8;">
+          <div class="flex justify-between items-end">
+            <div>
+              <h2 class="text-2xl font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">Registro de Voltas</h2>
+              <p class="text-sm mt-1" style="color: rgba(86,66,65,0.6); font-family: 'Inter', sans-serif;">Intervalos precisos da sessão</p>
+            </div>
+            <span id="lap-count-badge" class="text-xs font-bold px-3 py-1 rounded-full" style="font-family: 'Space Grotesk', sans-serif; color: #903233; background-color: rgba(144,50,51,0.1);">0 Voltas</span>
+          </div>
+
+          <div id="laps-list" class="space-y-2 overflow-y-auto pr-2" style="max-height: 320px;">
+            <div id="laps-empty" class="text-center py-8" style="color: rgba(86,66,65,0.4); font-family: 'Inter', sans-serif; font-size: 0.875rem;">
+              Nenhuma volta registrada ainda
+            </div>
+          </div>
+        </div>
+
+        <!-- Session Stats -->
+        <div class="md:col-span-4 flex flex-col gap-6">
+          <div class="rounded-[2rem] p-8 flex-1 flex flex-col justify-between" style="background-color: rgba(144,50,51,0.05); border: 1px solid rgba(144,50,51,0.1);">
+            <div>
+              <span class="material-symbols-outlined mb-4 block" style="color: #903233;">insights</span>
+              <h3 class="text-lg font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">Estatísticas</h3>
+              <div class="mt-4 space-y-3">
+                <div>
+                  <p class="text-[10px] uppercase tracking-widest" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Melhor Volta</p>
+                  <p id="best-lap" class="font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">--:--:--</p>
+                </div>
+                <div>
+                  <p class="text-[10px] uppercase tracking-widest" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Última Volta</p>
+                  <p id="last-lap" class="font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">--:--:--</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[2rem] p-8 flex items-center gap-6 group transition-colors cursor-pointer" style="background-color: #e7e8ed;" id="btn-clear-laps">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+              <span class="material-symbols-outlined" style="color: #564241;">delete_sweep</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">Limpar Voltas</h3>
+              <p class="text-[10px] uppercase tracking-wider" style="font-family: 'Space Grotesk', sans-serif; color: rgba(86,66,65,0.6);">Apagar registros</p>
+            </div>
+            <span class="material-symbols-outlined ml-auto group-hover:translate-x-1 transition-transform" style="color: rgba(86,66,65,0.4);">chevron_right</span>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  let running = false;
+  let startTime = 0;
+  let elapsedMs = 0;
+  let lapStart = 0;
+  let animFrameId: number | null = null;
+  const laps: number[] = [];
+
+  const timerDisplay = document.getElementById('timer-display')!;
+  const msDisplay = document.getElementById('ms-display')!;
+  const startBtn = document.getElementById('btn-start')!;
+  const startIcon = document.getElementById('start-icon')!;
+  const resetBtn = document.getElementById('btn-reset')!;
+  const lapBtn = document.getElementById('btn-lap')!;
+  const lapsList = document.getElementById('laps-list')!;
+  const lapsEmpty = document.getElementById('laps-empty')!;
+  const lapCountBadge = document.getElementById('lap-count-badge')!;
+  const bestLap = document.getElementById('best-lap')!;
+  const lastLap = document.getElementById('last-lap')!;
+  const ringProgress = document.getElementById('ring-progress') as SVGCircleElement;
+  const clearLapsBtn = document.getElementById('btn-clear-laps')!;
+
+  function formatMs(ms: number): string {
+    const h = Math.floor(ms / 3600000);
+    const m = Math.floor((ms % 3600000) / 60000);
+    const s = Math.floor((ms % 60000) / 1000);
+    const cs = Math.floor((ms % 1000) / 10);
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
+
+  function formatCentiseconds(ms: number): string {
+    return Math.floor((ms % 1000) / 10).toString().padStart(2, '0');
+  }
+
+  function updateDisplay(ms: number) {
+    timerDisplay.childNodes[0].textContent = formatMs(ms);
+    msDisplay.textContent = `.${formatCentiseconds(ms)}`;
+  }
+
+  function updateRing(ms: number) {
+    const r = ringProgress.r.baseVal.value;
+    const circumference = 2 * Math.PI * r;
+    // One full rotation per minute
+    const progress = (ms % 60000) / 60000;
+    ringProgress.style.strokeDasharray = `${progress * circumference} ${circumference}`;
+  }
+
+  function frame() {
+    if (!running) return;
+    const now = performance.now();
+    const ms = elapsedMs + (now - startTime);
+    updateDisplay(ms);
+    updateRing(ms);
+    animFrameId = requestAnimationFrame(frame);
+  }
+
+  function addLapToList(lapMs: number, index: number) {
+    lapsEmpty.style.display = 'none';
+
+    const lapDiff = laps.length > 1 ? lapMs - laps[laps.length - 2] : null;
+    const isBest = laps.length === 0 || lapMs <= Math.min(...laps);
+
+    const div = document.createElement('div');
+    div.className = 'flex items-center justify-between p-4 rounded-2xl group transition-all hover:translate-x-1';
+    div.style.backgroundColor = isBest ? '#ffffff' : 'rgba(255,255,255,0.5)';
+    if (isBest) div.style.borderLeft = '4px solid #97d694';
+
+    const diffText = lapDiff !== null
+      ? `<p class="text-xs font-bold" style="font-family: 'Space Grotesk', sans-serif; color: ${lapDiff >= 0 ? '#903233' : '#235d29'};">${lapDiff >= 0 ? '+' : ''}${(lapDiff / 1000).toFixed(2)}s</p><p class="text-[10px] uppercase" style="font-family: 'Space Grotesk', sans-serif; color: rgba(86,66,65,0.6);">Diff</p>`
+      : '';
+
+    div.innerHTML = `
+      <div class="flex items-center gap-4">
+        <span class="text-xs font-bold" style="font-family: 'Space Grotesk', sans-serif; color: rgba(86,66,65,0.4);">${String(index).padStart(2, '0')}</span>
+        <div>
+          <p class="text-sm font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">${formatMs(lapMs)}.${formatCentiseconds(lapMs)}</p>
+          <p class="text-[10px] uppercase" style="font-family: 'Space Grotesk', sans-serif; color: rgba(86,66,65,0.6);">Tempo de Volta</p>
+        </div>
+      </div>
+      <div class="text-right">${diffText}</div>
+    `;
+
+    lapsList.insertBefore(div, lapsList.firstChild);
+  }
+
+  function updateStats() {
+    lapCountBadge.textContent = `${laps.length} ${laps.length === 1 ? 'Volta' : 'Voltas'}`;
+    if (laps.length > 0) {
+      const best = Math.min(...laps);
+      const last = laps[laps.length - 1];
+      bestLap.textContent = `${formatMs(best)}.${formatCentiseconds(best)}`;
+      lastLap.textContent = `${formatMs(last)}.${formatCentiseconds(last)}`;
+    }
+  }
+
+  startBtn.addEventListener('click', () => {
+    if (running) {
+      // Pause
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      animFrameId = null;
+      elapsedMs += performance.now() - startTime;
+      running = false;
+      startIcon.textContent = 'play_arrow';
+    } else {
+      // Start/Resume
+      startTime = performance.now();
+      if (lapStart === 0) lapStart = startTime;
+      running = true;
+      startIcon.textContent = 'pause';
+      animFrameId = requestAnimationFrame(frame);
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    animFrameId = null;
+    running = false;
+    elapsedMs = 0;
+    lapStart = 0;
+    startIcon.textContent = 'play_arrow';
+    updateDisplay(0);
+    updateRing(0);
+    laps.length = 0;
+    lapsEmpty.style.display = '';
+    lapsList.querySelectorAll('div:not(#laps-empty)').forEach((el) => el.remove());
+    lapCountBadge.textContent = '0 Voltas';
+    bestLap.textContent = '--:--:--';
+    lastLap.textContent = '--:--:--';
+  });
+
+  lapBtn.addEventListener('click', () => {
+    if (!running && elapsedMs === 0) return;
+    const now = performance.now();
+    const totalMs = running ? elapsedMs + (now - startTime) : elapsedMs;
+    const lapMs = totalMs - laps.reduce((acc, l) => acc + l, 0);
+    laps.push(lapMs);
+    lapStart = now;
+    addLapToList(lapMs, laps.length);
+    updateStats();
+  });
+
+  clearLapsBtn.addEventListener('click', () => {
+    laps.length = 0;
+    lapsEmpty.style.display = '';
+    lapsList.querySelectorAll('div:not(#laps-empty)').forEach((el) => el.remove());
+    lapCountBadge.textContent = '0 Voltas';
+    bestLap.textContent = '--:--:--';
+    lastLap.textContent = '--:--:--';
+  });
+
+  // Initialize
+  updateDisplay(0);
+
+  // Fix: ensure firstChild is text node for display
+  const dn = timerDisplay;
+  if (!dn.childNodes[0] || dn.childNodes[0].nodeType !== Node.TEXT_NODE) {
+    dn.insertBefore(document.createTextNode('00:00:00'), dn.firstChild);
+  }
+</script>

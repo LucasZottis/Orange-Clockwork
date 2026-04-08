@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Light Mode */
+  --color-primary: #903233;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed: #ffdad8;
+  --color-primary-fixed-dim: #ffb3b0;
+  --color-primary-container: #af4949;
+  --color-on-primary-container: #ffe5e4;
+  --color-on-primary-fixed: #410006;
+  --color-on-primary-fixed-variant: #812729;
+  --color-inverse-primary: #ffb3b0;
+
+  --color-secondary: #4c616c;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #cfe6f2;
+  --color-on-secondary-container: #526772;
+  --color-secondary-fixed: #cfe6f2;
+  --color-secondary-fixed-dim: #b4cad6;
+  --color-on-secondary-fixed: #071e27;
+  --color-on-secondary-fixed-variant: #354a53;
+
+  --color-tertiary: #235d29;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #3c763f;
+  --color-on-tertiary-container: #bafbb6;
+  --color-tertiary-fixed: #b2f2ae;
+  --color-tertiary-fixed-dim: #97d694;
+  --color-on-tertiary-fixed: #002105;
+  --color-on-tertiary-fixed-variant: #16521f;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-surface: #f9f9fe;
+  --color-on-surface: #191c1f;
+  --color-surface-variant: #e2e2e7;
+  --color-on-surface-variant: #564241;
+  --color-surface-bright: #f9f9fe;
+  --color-surface-dim: #d9dade;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f3f8;
+  --color-surface-container: #ededf2;
+  --color-surface-container-high: #e7e8ed;
+  --color-surface-container-highest: #e2e2e7;
+  --color-inverse-surface: #2e3034;
+  --color-inverse-on-surface: #f0f0f5;
+  --color-surface-tint: #a03e3e;
+
+  --color-outline: #897270;
+  --color-outline-variant: #dcc0be;
+  --color-background: #f9f9fe;
+  --color-on-background: #191c1f;
+
+  /* Border radius */
+  --radius-DEFAULT: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Fonts */
+  --font-headline: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
+  --font-newsreader: "Newsreader", serif;
+  --font-manrope: "Manrope", sans-serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}
