@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://lucaszottis.github.io',
-  base: '/timer',
+  base: '/Timer',
   vite: {
     plugins: [tailwindcss()],
   },
