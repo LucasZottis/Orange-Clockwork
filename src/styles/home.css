@@ -37,11 +37,269 @@
     font-weight: 700;
 }
 
+.hero-tagline {
+    font-family: var(--font-headline);
+    font-size: clamp(1.1rem, 3vw, 1.75rem);
+    font-weight: 600;
+    color: var(--color-on-surface);
+}
+
 .btn-pomodoro {
-    /* background: linear-gradient(135deg, #903233, #af4949); */
-    background: linear-gradient(135deg, var(--color-inverse-primary), var(--color-primary));
-    color: #ffffff;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(135deg, var(--color-primary-dim), var(--color-primary));
+    color: var(--color-on-primary);
+    font-family: var(--font-headline);
     font-size: 1rem;
-    box-shadow: 0 0 40px rgba(144, 50, 51, 0.35);
+    font-weight: 700;
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.2);
+}
+
+/* ============================================================
+ * Home Page — Sections
+ * ============================================================ */
+
+.section-features {
+    background-color: var(--color-surface-container-low);
+}
+
+.section-how-it-works {
+    background-color: var(--color-surface-dim);
+}
+
+.section-cta {
+    background: linear-gradient(180deg, var(--color-surface-container-low) 0%, var(--color-surface) 100%);
+}
+
+/* ============================================================
+ * Home Page — Section Typography
+ * ============================================================ */
+
+.section-label {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-primary);
+}
+
+.section-heading {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-on-surface);
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.section-subtext {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-on-surface-variant);
+}
+
+/* ============================================================
+ * Home Page — Bento Grid Cards
+ * ============================================================ */
+
+.bento-card {
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.bento-card-featured {
+    background: linear-gradient(135deg, var(--color-surface-container-high) 0%, #1f1200 100%);
+}
+
+.bento-card-primary {
+    background-color: var(--color-surface-container-high);
+}
+
+.bento-card-secondary {
+    background-color: var(--color-surface-container);
+}
+
+/* ============================================================
+ * Home Page — Card Internal Elements
+ * ============================================================ */
+
+.card-label {
+    font-family: var(--font-label);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-on-surface-variant);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.card-label-featured {
+    color: var(--color-primary-dim);
+}
+
+.card-heading {
+    font-family: var(--font-headline);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin-bottom: 0.75rem;
+}
+
+.card-body {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--color-on-surface-variant);
+}
+
+.card-icon-wrap {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background-color: rgba(255, 140, 0, 0.1);
+}
+
+.card-icon-wrap-tertiary {
+    background-color: rgba(255, 227, 147, 0.08);
+}
+
+.check-item-text {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-on-surface-variant);
+}
+
+/* ============================================================
+ * Home Page — Buttons
+ * ============================================================ */
+
+/* Primary CTA — gradient orange */
+.btn-primary-cta {
+    background: linear-gradient(135deg, var(--color-primary-dim), var(--color-primary));
+    color: var(--color-on-primary);
+    font-family: var(--font-headline);
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.2);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-primary-cta:hover {
+    opacity: 0.9;
+}
+
+/* Secondary CTA — submerged (DESIGN.md §5) */
+.btn-secondary-cta {
+    background-color: var(--color-surface-container-highest);
+    color: var(--color-primary);
+    font-family: var(--font-headline);
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    transition: background-color 0.2s;
+}
+
+.btn-secondary-cta:hover {
+    background-color: var(--color-surface-container-high);
+}
+
+/* Ghost CTA — tertiary/no fill (DESIGN.md §5) */
+.btn-ghost-cta {
+    background-color: var(--color-surface-container-high);
+    color: var(--color-on-surface-variant);
+    font-family: var(--font-headline);
+    font-weight: 500;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-outline-variant);
+    transition: background-color 0.2s;
+}
+
+.btn-ghost-cta:hover {
+    background-color: var(--color-surface-container-highest);
+}
+
+/* ============================================================
+ * Home Page — How It Works Step Cards
+ * ============================================================ */
+
+.step-card {
+    background-color: var(--color-surface-container-high);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-number {
+    font-family: var(--font-headline);
+    font-size: 2.25rem;
+    font-weight: 700;
+    opacity: 0.15;
+}
+
+.step-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-icon-wrap-primary {
+    background-color: rgba(255, 140, 0, 0.1);
+}
+
+.step-icon-wrap-tertiary {
+    background-color: rgba(255, 227, 147, 0.08);
+}
+
+.step-heading {
+    font-family: var(--font-headline);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin-bottom: 0.5rem;
+}
+
+.step-body {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+}
+
+/* ============================================================
+ * Home Page — Final CTA Section
+ * ============================================================ */
+
+.cta-blur {
+    background-color: rgba(255, 140, 0, 0.1);
+}
+
+.cta-label {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-primary-dim);
+}
+
+.cta-heading {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-on-surface);
+    font-size: clamp(1.75rem, 5vw, 3rem);
+}
+
+.cta-subtext {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-on-surface-variant);
 }
