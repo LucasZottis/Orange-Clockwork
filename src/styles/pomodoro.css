@@ -1,0 +1,92 @@
+/* ============================================================
+ * Pomodoro Page — Ambient Glow
+ * ============================================================ */
+
+.pomodoro-glow {
+    background-color: rgba(255, 140, 0, 0.05);
+    filter: blur(100px);
+}
+
+/* Circular ring container */
+.pomodoro-ring {
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    border-radius: 9999px;
+    box-shadow: 0 0 40px 10px rgba(255, 140, 0, 0.05);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animated pulse overlay */
+.pomodoro-ring-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 3px solid var(--color-primary-dim);
+    opacity: 0.15;
+    transform: scale(1.04);
+}
+
+/* ============================================================
+ * Pomodoro Page — Focus Task Card
+ * ============================================================ */
+
+.focus-card {
+    background-color: var(--color-surface-container);
+    border-radius: 2rem;
+    padding: 2rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.focus-title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin-top: 0.25rem;
+}
+
+.focus-desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    opacity: 0.8;
+}
+
+/* ============================================================
+ * Pomodoro Page — Session Progress Card
+ * ============================================================ */
+
+.session-progress-card {
+    background-color: var(--color-surface-container-high);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+/* ============================================================
+ * Pomodoro Page — Upcoming Card
+ * ============================================================ */
+
+.upcoming-card {
+    background-color: var(--color-surface-container);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.upcoming-item-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    background-color: var(--color-outline-variant);
+}
+
+.upcoming-item-text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-on-surface);
+}

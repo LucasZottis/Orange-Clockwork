@@ -29,9 +29,7 @@ import Layout from '../layouts/Layout.astro';
 
           <div class="stopwatch-ring w-[280px] h-[280px] md:w-[380px] md:h-[380px]">
             <div class="stopwatch-ring-pulse animate-pulse"></div>
-            <h1 id="timer-display" class="timer-display select-none" style="font-size: clamp(3.5rem, 12vw, 7rem);">
-              00:00:00<span id="ms-display" class="timer-sep" style="font-size: clamp(1.25rem, 4vw, 2.5rem);">.00</span>
-            </h1>
+            <h1 id="timer-display" class="timer-display select-none" style="font-size: clamp(3.5rem, 12vw, 7rem);"><span id="time-main">00:00:00</span><span id="ms-display" class="timer-sep" style="font-size: clamp(1.25rem, 4vw, 2.5rem);">.00</span></h1>
           </div>
         </div>
 
@@ -117,6 +115,7 @@ import Layout from '../layouts/Layout.astro';
   const laps: number[] = [];
 
   const timerDisplay = document.getElementById('timer-display')!;
+  const timeMain = document.getElementById('time-main')!;
   const msDisplay = document.getElementById('ms-display')!;
   const startBtn = document.getElementById('btn-start')!;
   const startIcon = document.getElementById('start-icon')!;
@@ -142,13 +141,13 @@ import Layout from '../layouts/Layout.astro';
   }
 
   function updateDisplay(ms: number) {
-    timerDisplay.childNodes[0].textContent = formatMs(ms);
+    timeMain.textContent = formatMs(ms);
     msDisplay.textContent = `.${formatCentiseconds(ms)}`;
   }
 
   function updateRing(ms: number) {
-    const r = ringProgress.r.baseVal.value;
-    const circumference = 2 * Math.PI * r;
+    const circumference = ringProgress.getTotalLength();
+    if (!circumference) return;
     const progress = (ms % 60000) / 60000;
     ringProgress.style.strokeDasharray = `${progress * circumference} ${circumference}`;
   }
@@ -255,8 +254,4 @@ import Layout from '../layouts/Layout.astro';
 
   // Initialize
   updateDisplay(0);
-  const dn = timerDisplay;
-  if (!dn.childNodes[0] || dn.childNodes[0].nodeType !== Node.TEXT_NODE) {
-    dn.insertBefore(document.createTextNode('00:00:00'), dn.firstChild);
-  }
 </script>

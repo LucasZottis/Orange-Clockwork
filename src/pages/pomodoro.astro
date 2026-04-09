@@ -2,229 +2,162 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+<style>
+  @import "../styles/pomodoro.css";
+</style>
+
 <Layout title="Pomodoro" activePage="pomodoro">
-  <div class="min-h-screen pt-12 pb-24 px-6 md:px-12 flex flex-col items-center">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 py-12">
 
     <!-- Mode Switcher -->
-    <div class="inline-flex p-1 rounded-xl mb-16">
-      <button
-        id="btn-pomodoro"
-        class="mode-btn active-mode px-6 py-2.5 rounded-lg text-sm font-semibold transition-all"
-        data-mode="pomodoro"
-        data-duration="1500"
-      >
-        Pomodoro
-      </button>
-      <button
-        id="btn-short"
-        class="mode-btn px-6 py-2.5 rounded-lg text-sm font-medium transition-all"
-        data-mode="short"
-        data-duration="300"
-        style="color: #564241;"
-      >
-        Pausa Curta
-      </button>
-      <button
-        id="btn-long"
-        class="mode-btn px-6 py-2.5 rounded-lg text-sm font-medium transition-all"
-        data-mode="long"
-        data-duration="900"
-        style="color: #564241;"
-      >
-        Pausa Longa
-      </button>
-    </div>
-
-    <!-- Hero Timer Section -->
-    <div class="relative w-full max-w-3xl flex flex-col items-center">
-      <!-- Decorative background blurs -->
-      <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full blur-3xl -z-10" style="background-color: rgba(144,50,51,0.05);"></div>
-      <div class="absolute top-24 -right-12 w-80 h-80 rounded-full blur-3xl -z-10" style="background-color: rgba(35,93,41,0.05);"></div>
-
-      <!-- Session info -->
-      <div class="text-center mb-8">
-        <h1 id="session-label" class="text-3xl font-bold mb-2 tracking-tight">
-          Sessão de Trabalho Profundo
-        </h1>
-        <div class="flex items-center justify-center gap-2">
-          <span class="inline-block w-2 h-2 rounded-full" style="background-color: #235d29;"></span>
-          <span class="text-xs font-bold tracking-widest uppercase" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">
-            Sessão <span id="session-count">1</span> de 4
-          </span>
-        </div>
-      </div>
-
-      <!-- Timer Container -->
-      <div class="relative w-full flex items-center justify-center rounded-[48px] overflow-hidden" style="aspect-ratio: 4/3; background-color: #f3f3f8;">
-        <!-- SVG Progress Ring -->
-        <svg id="progress-ring" class="absolute inset-0 w-full h-full -rotate-90 p-8">
-          <circle
-            id="ring-bg"
-            cx="50%"
-            cy="50%"
-            fill="none"
-            r="45%"
-            stroke="currentColor"
-            stroke-width="2"
-            style="color: #dcc0be; opacity: 0.2;"
-          ></circle>
-          <circle
-            id="ring-progress"
-            cx="50%"
-            cy="50%"
-            fill="none"
-            r="45%"
-            stroke="url(#timerGradient)"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-dasharray="0 1000"
-          ></circle>
-          <defs>
-            <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color: #903233;"></stop>
-              <stop offset="100%" style="stop-color: #af4949;"></stop>
-            </linearGradient>
-          </defs>
-        </svg>
-
-        <!-- Timer Display -->
-        <div class="flex flex-col items-center z-10">
-          <div id="timer-display" class="font-bold leading-none tracking-tighter flex items-baseline" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f; font-size: clamp(5rem, 18vw, 12rem);">
-            25<span style="color: #af4949; opacity: 0.4;">:</span>00
-          </div>
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <div class="mt-12 flex items-center gap-8">
-        <button
-          id="btn-reset"
-          class="p-4 rounded-full transition-all active:scale-90"
-          style="color: #564241;"
-          title="Reiniciar"
-        >
-          <span class="material-symbols-outlined text-3xl">refresh</span>
+    <div class="flex justify-center mb-12">
+      <div class="mode-switcher">
+        <button id="btn-pomodoro" class="mode-btn active-mode px-6 py-2.5 rounded-lg text-sm font-semibold transition-all" data-mode="pomodoro" data-duration="1500">
+          Pomodoro
         </button>
-
-        <button
-          id="btn-start"
-          class="group relative px-12 py-6 rounded-full font-bold shadow-xl transition-all active:scale-95 flex items-center gap-4 hover:scale-105"
-          style="background: linear-gradient(135deg, #903233, #af4949); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem;"
-        >
-          <span id="start-icon" class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-          <span id="start-label">INICIAR</span>
+        <button id="btn-short" class="mode-btn px-6 py-2.5 rounded-lg text-sm font-medium transition-all" data-mode="short" data-duration="300">
+          Pausa Curta
         </button>
-
-        <button
-          id="btn-skip"
-          class="p-4 rounded-full transition-all active:scale-90"
-          style="color: #564241;"
-          title="Pular"
-        >
-          <span class="material-symbols-outlined text-3xl">skip_next</span>
+        <button id="btn-long" class="mode-btn px-6 py-2.5 rounded-lg text-sm font-medium transition-all" data-mode="long" data-duration="900">
+          Pausa Longa
         </button>
       </div>
     </div>
 
-    <!-- Bento Grid - Info Section -->
-    <div class="mt-24 w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-      <!-- Current Focus Card -->
-      <div class="md:col-span-8 p-8 rounded-[32px] border-l-4" style="background-color: #ffffff; border-color: #3c763f;">
-        <div class="flex justify-between items-start mb-6">
-          <div>
-            <span class="text-[10px] uppercase tracking-[0.2em] font-bold" style="font-family: 'Space Grotesk', sans-serif; color: #235d29;">Foco Atual</span>
-            <h2 id="focus-title" class="text-2xl font-bold mt-1" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">
-              Minha Tarefa
-            </h2>
+      <!-- ── Timer Section ─────────────────────────────────────── -->
+      <section class="lg:col-span-7 flex flex-col items-center justify-center relative" style="min-height: 560px;">
+
+        <!-- Ambient glow -->
+        <div class="pomodoro-glow absolute -z-10 w-96 h-96 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+        <!-- Session label -->
+        <p id="session-label" class="label-xs mb-8" style="color: var(--color-on-surface-variant); letter-spacing: 0.3em;">Sessão de Trabalho Profundo</p>
+
+        <!-- Breath ring + SVG progress + timer display -->
+        <div class="relative flex flex-col items-center">
+          <!-- SVG Progress Ring -->
+          <svg id="progress-ring" class="absolute pointer-events-none -rotate-90" style="inset: -4rem; width: calc(100% + 8rem); height: calc(100% + 8rem);">
+            <circle cx="50%" cy="50%" fill="transparent" r="48%" stroke-width="2" style="stroke: rgba(255, 140, 0, 0.1);"></circle>
+            <circle id="ring-progress" cx="50%" cy="50%" fill="transparent" r="48%" stroke-width="2" stroke-dasharray="0 10000" stroke-linecap="round" style="stroke: var(--color-primary);"></circle>
+          </svg>
+
+          <div class="pomodoro-ring w-[280px] h-[280px] md:w-[380px] md:h-[380px]">
+            <div class="pomodoro-ring-pulse animate-pulse"></div>
+            <div id="timer-display" class="timer-display select-none" style="font-size: clamp(3.5rem, 12vw, 7rem);">
+              25<span class="timer-sep">:</span>00
+            </div>
           </div>
-          <button id="btn-edit-focus" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-            <span class="material-symbols-outlined" style="color: #564241;">edit</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="mt-16 flex items-center gap-8 md:gap-12">
+          <button id="btn-reset" class="group flex flex-col items-center gap-2" title="Reiniciar">
+            <div class="btn-control w-14 h-14 rounded-full flex items-center justify-center">
+              <span class="material-symbols-outlined">replay</span>
+            </div>
+            <span class="label-xs" style="color: var(--color-on-surface-variant); opacity: 0.6;">Reiniciar</span>
+          </button>
+
+          <button id="btn-start" class="btn-start w-24 h-24 rounded-full flex items-center justify-center relative overflow-hidden transition-all hover:scale-105 active:scale-95">
+            <span id="start-icon" class="material-symbols-outlined text-4xl relative z-10" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+          </button>
+
+          <button id="btn-skip" class="group flex flex-col items-center gap-2" title="Pular">
+            <div class="btn-control w-14 h-14 rounded-full flex items-center justify-center">
+              <span class="material-symbols-outlined">skip_next</span>
+            </div>
+            <span class="label-xs" style="color: var(--color-on-surface-variant); opacity: 0.6;">Pular</span>
           </button>
         </div>
-        <div id="focus-edit" class="hidden mb-4">
-          <input
-            id="focus-input"
-            type="text"
-            placeholder="Em que você está trabalhando?"
-            class="w-full px-4 py-2 rounded-xl border-0 outline-none text-sm"
-            style="background-color: #f3f3f8; font-family: 'Inter', sans-serif; color: #191c1f; border-bottom: 2px solid #7ad9ac;"
-          />
-        </div>
-        <p id="focus-desc" class="leading-relaxed" style="color: #564241; font-family: 'Inter', sans-serif;">
-          Defina sua tarefa de foco para acompanhar seu progresso durante a sessão Pomodoro.
-        </p>
-      </div>
+      </section>
 
-      <!-- Today's Goal -->
-      <div class="md:col-span-4 p-8 rounded-[32px] flex flex-col justify-between" style="background-color: #f3f3f8;">
-        <div>
-          <span class="text-[10px] uppercase tracking-[0.2em] font-bold" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Meta do Dia</span>
-          <div class="text-4xl font-bold mt-2" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">
-            <span id="sessions-done">0</span><span class="text-xl ml-2" style="color: #564241;">Sessões</span>
-          </div>
-        </div>
-        <div class="mt-4">
-          <div class="w-full h-1.5 rounded-full overflow-hidden" style="background-color: #e7e8ed;">
-            <div id="goal-progress" class="h-full rounded-full transition-all duration-500" style="background-color: #903233; width: 0%;"></div>
-          </div>
-          <p class="text-xs mt-2" style="color: #564241; font-family: 'Space Grotesk', sans-serif;">Meta: 4 sessões</p>
-        </div>
-      </div>
+      <!-- ── Sidebar ────────────────────────────────────────────── -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
 
-      <!-- Up Next -->
-      <div class="md:col-span-4 p-6 rounded-[32px]" style="background-color: rgba(231,232,237,0.5);">
-        <span class="text-[10px] uppercase tracking-[0.2em] font-bold" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">A Seguir</span>
-        <div class="mt-4 space-y-4" id="upcoming-list">
-          <div class="flex items-center gap-4 group">
-            <div class="w-2 h-2 rounded-full" style="background-color: #dcc0be;"></div>
-            <span class="font-medium" style="color: #191c1f; font-family: 'Inter', sans-serif;">Pausa Curta (5 min)</span>
+        <!-- Focus Task Card -->
+        <div class="focus-card">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <span class="label-xs" style="color: var(--color-primary);">Foco Atual</span>
+              <h2 id="focus-title" class="focus-title">Minha Tarefa</h2>
+            </div>
+            <button id="btn-edit-focus" class="btn-control w-10 h-10 rounded-full flex items-center justify-center">
+              <span class="material-symbols-outlined" style="font-size: 1.125rem;">edit</span>
+            </button>
           </div>
-          <div class="flex items-center gap-4 group">
-            <div class="w-2 h-2 rounded-full" style="background-color: #dcc0be;"></div>
-            <span class="font-medium" style="color: #191c1f; font-family: 'Inter', sans-serif;">Segunda Sessão de Trabalho</span>
+          <div id="focus-edit" class="hidden mb-4">
+            <input
+              id="focus-input"
+              type="text"
+              placeholder="Em que você está trabalhando?"
+              class="time-input text-sm"
+            />
           </div>
-        </div>
-      </div>
-
-      <!-- Stats Card -->
-      <div class="md:col-span-8 p-8 rounded-[32px] flex flex-col md:flex-row items-center gap-8" style="background-color: #f3f3f8;">
-        <div class="flex-1">
-          <span class="text-[10px] uppercase tracking-[0.2em] font-bold" style="font-family: 'Space Grotesk', sans-serif; color: #564241;">Técnica Pomodoro</span>
-          <p class="mt-2 leading-relaxed" style="color: #564241; font-family: 'Inter', sans-serif; font-size: 0.875rem;">
-            Trabalhe por <strong style="color: #903233;">25 minutos</strong>, depois faça uma pausa de <strong style="color: #235d29;">5 minutos</strong>. Após 4 sessões, faça uma pausa longa de <strong style="color: #235d29;">15 minutos</strong>.
+          <p id="focus-desc" class="focus-desc">
+            Defina sua tarefa de foco para acompanhar seu progresso durante a sessão Pomodoro.
           </p>
         </div>
-        <div class="flex gap-3">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              class="session-dot w-4 h-4 rounded-full border-2 transition-all duration-300"
-              data-index={i}
-              style="border-color: #897270; background-color: transparent;"
-            ></div>
-          ))}
-        </div>
-      </div>
 
+        <!-- Session Progress Card -->
+        <div class="session-progress-card">
+          <div class="flex justify-between items-center mb-5">
+            <span class="label-xs" style="color: var(--color-on-surface-variant);">Progresso da Sessão</span>
+            <span class="label-xs" style="color: var(--color-primary);">
+              Sessão <span id="session-count">1</span> de 4
+            </span>
+          </div>
+
+          <!-- Session dots -->
+          <div class="flex gap-3 mb-5">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div class="session-dot flex-1 h-2 rounded-full border-2 transition-all duration-300" data-index={i}></div>
+            ))}
+          </div>
+
+          <!-- Goal progress -->
+          <div class="progress-track w-full h-1.5 rounded-full overflow-hidden">
+            <div id="goal-progress" class="progress-fill h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+          </div>
+          <div class="flex justify-between mt-2">
+            <span class="label-xs" style="color: var(--color-on-surface-variant); opacity: 0.6;">
+              <span id="sessions-done">0</span> sessões concluídas
+            </span>
+            <span class="label-xs" style="color: var(--color-on-surface-variant); opacity: 0.6;">Meta: 4</span>
+          </div>
+        </div>
+
+        <!-- Stats Card -->
+        <div class="stats-card">
+          <span class="material-symbols-outlined mb-4 block" style="color: var(--color-primary);">schedule</span>
+          <h3 class="font-headline font-bold text-lg" style="color: var(--color-on-surface);">Técnica Pomodoro</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--color-on-surface-variant);">
+            Trabalhe por <strong style="color: var(--color-primary);">25 minutos</strong>, depois faça uma pausa de
+            <strong style="color: var(--color-tertiary);">5 minutos</strong>. Após 4 sessões, faça uma pausa longa de
+            <strong style="color: var(--color-tertiary);">15 minutos</strong>.
+          </p>
+        </div>
+
+        <!-- Up Next -->
+        <div class="upcoming-card">
+          <span class="label-xs mb-4 block" style="color: var(--color-on-surface-variant);">A Seguir</span>
+          <div class="space-y-3" id="upcoming-list">
+            <div class="flex items-center gap-3">
+              <div class="upcoming-item-dot"></div>
+              <span class="upcoming-item-text">Pausa Curta (5 min)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="upcoming-item-dot"></div>
+              <span class="upcoming-item-text">Segunda Sessão de Trabalho</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </Layout>
-
-<style>
-  .active-mode {
-    background-color: #ffffff;
-    color: #903233;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-
-  .mode-btn:not(.active-mode):hover {
-    background-color: #e7e8ed;
-  }
-
-  #btn-reset:hover, #btn-skip:hover {
-    background-color: #e7e8ed;
-  }
-</style>
 
 <script>
   // --- State ---
@@ -254,14 +187,13 @@ import Layout from '../layouts/Layout.astro';
   const timerDisplay = document.getElementById('timer-display')!;
   const startBtn = document.getElementById('btn-start')!;
   const startIcon = document.getElementById('start-icon')!;
-  const startLabel = document.getElementById('start-label')!;
   const resetBtn = document.getElementById('btn-reset')!;
   const skipBtn = document.getElementById('btn-skip')!;
   const sessionLabel = document.getElementById('session-label')!;
   const sessionCount = document.getElementById('session-count')!;
   const sessionsDoneEl = document.getElementById('sessions-done')!;
   const goalProgress = document.getElementById('goal-progress')!;
-  const ringProgress = document.getElementById('ring-progress') as SVGCircleElement;
+  const ringProgress = document.getElementById('ring-progress') as unknown as SVGCircleElement;
   const editBtn = document.getElementById('btn-edit-focus')!;
   const focusEdit = document.getElementById('focus-edit')!;
   const focusInput = document.getElementById('focus-input') as HTMLInputElement;
@@ -276,33 +208,24 @@ import Layout from '../layouts/Layout.astro';
   }
 
   function updateDisplay() {
-    const formatted = formatTime(remainingSeconds);
-    const [mm, ss] = formatted.split(':');
-    timerDisplay.innerHTML = `${mm}<span style="color:#af4949;opacity:0.4;">:</span>${ss}`;
-    document.title = `${formatted} - Chronos Focus`;
+    const [mm, ss] = formatTime(remainingSeconds).split(':');
+    timerDisplay.innerHTML = `${mm}<span class="timer-sep">:</span>${ss}`;
+    document.title = `${formatTime(remainingSeconds)} — Pomodoro`;
   }
 
   function updateRing() {
-    const ringEl = ringProgress;
-    if (!ringEl) return;
-
-    // Get the actual rendered circumference
-    const r = ringEl.r.baseVal.value;
+    const r = ringProgress.r.baseVal.value;
     const circumference = 2 * Math.PI * r;
     const progress = 1 - remainingSeconds / totalSeconds;
-    const dashArray = progress * circumference;
-    ringEl.style.strokeDasharray = `${dashArray} ${circumference}`;
+    ringProgress.style.strokeDasharray = `${progress * circumference} ${circumference}`;
   }
 
   function updateSessionDots() {
     sessionDots.forEach((dot, i) => {
-      const el = dot as HTMLElement;
       if (i < sessionsDone) {
-        el.style.backgroundColor = '#903233';
-        el.style.borderColor = '#903233';
+        dot.classList.add('filled');
       } else {
-        el.style.backgroundColor = 'transparent';
-        el.style.borderColor = '#897270';
+        dot.classList.remove('filled');
       }
     });
   }
@@ -316,18 +239,14 @@ import Layout from '../layouts/Layout.astro';
     intervalId = null;
 
     startIcon.textContent = 'play_arrow';
-    startLabel.textContent = 'INICIAR';
     sessionLabel.textContent = SESSION_LABELS[mode];
 
-    // Update mode buttons
     document.querySelectorAll('.mode-btn').forEach((btn) => {
       const el = btn as HTMLElement;
       if (el.dataset.mode === mode) {
         el.classList.add('active-mode');
-        el.style.color = '#903233';
       } else {
         el.classList.remove('active-mode');
-        el.style.color = '#564241';
       }
     });
 
@@ -341,9 +260,7 @@ import Layout from '../layouts/Layout.astro';
       intervalId = null;
       running = false;
       startIcon.textContent = 'play_arrow';
-      startLabel.textContent = 'INICIAR';
 
-      // Auto-advance
       if (currentMode === 'pomodoro') {
         sessionsDone++;
         const pct = Math.min((sessionsDone / GOAL_SESSIONS) * 100, 100);
@@ -373,16 +290,13 @@ import Layout from '../layouts/Layout.astro';
       intervalId = null;
       running = false;
       startIcon.textContent = 'play_arrow';
-      startLabel.textContent = 'CONTINUAR';
     } else {
       running = true;
       startIcon.textContent = 'pause';
-      startLabel.textContent = 'PAUSAR';
       intervalId = setInterval(tick, 1000);
     }
   }
 
-  // Event listeners
   startBtn.addEventListener('click', toggleTimer);
 
   resetBtn.addEventListener('click', () => {
@@ -391,7 +305,6 @@ import Layout from '../layouts/Layout.astro';
     running = false;
     remainingSeconds = totalSeconds;
     startIcon.textContent = 'play_arrow';
-    startLabel.textContent = 'INICIAR';
     updateDisplay();
     updateRing();
   });
@@ -401,7 +314,7 @@ import Layout from '../layouts/Layout.astro';
     intervalId = null;
     running = false;
     remainingSeconds = 0;
-    tick(); // Triggers auto-advance
+    tick();
   });
 
   document.querySelectorAll('.mode-btn').forEach((btn) => {
@@ -433,7 +346,7 @@ import Layout from '../layouts/Layout.astro';
     }
   });
 
-  // Initial render
+  // Initialize
   updateDisplay();
   updateRing();
   updateSessionDots();
