@@ -3,10 +3,10 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Pomodoro" activePage="pomodoro">
-  <div class="min-h-screen pt-12 pb-24 px-6 md:px-12 flex flex-col items-center" style="background-color: #f9f9fe;">
+  <div class="min-h-screen pt-12 pb-24 px-6 md:px-12 flex flex-col items-center">
 
     <!-- Mode Switcher -->
-    <div class="inline-flex p-1 rounded-xl mb-16" style="background-color: #f3f3f8; font-family: 'Space Grotesk', sans-serif;">
+    <div class="inline-flex p-1 rounded-xl mb-16">
       <button
         id="btn-pomodoro"
         class="mode-btn active-mode px-6 py-2.5 rounded-lg text-sm font-semibold transition-all"
@@ -43,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- Session info -->
       <div class="text-center mb-8">
-        <h1 id="session-label" class="text-3xl font-bold mb-2 tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;">
+        <h1 id="session-label" class="text-3xl font-bold mb-2 tracking-tight">
           Sessão de Trabalho Profundo
         </h1>
         <div class="flex items-center justify-center gap-2">
