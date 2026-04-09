@@ -85,31 +85,52 @@
   --font-manrope: "Manrope", sans-serif;
 }
 
-@layer base {
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    font-family: var(--font-body);
-    background-color: var(--color-background);
-    color: var(--color-on-surface);
-    /* DESIGN.md §3: body-lg com line-height generoso */
-    font-size: 1rem;
-    line-height: 1.6;
-  }
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  /* DESIGN.md §3: body-lg com line-height generoso */
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
-  /* DESIGN.md §4: Ambient Shadow = Orange Glow */
-  .shadow-ambient {
-    box-shadow: 0 0 32px 0 rgba(255, 140, 0, 0.10);
-  }
+.header,
+.footer {
+  background-color: #2F1500;
+  color: #FF8E13;
+}
 
-  /* DESIGN.md §4: Ghost Border fallback */
-  .border-ghost {
-    border: 1px solid rgba(72, 72, 71, 0.15); /* outline-variant @ 15% */
-  }
+.nav-item {
+  color: rgb(255 245 237 / 0.6);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
 
-  .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  }
+.nav-item.active-page {
+  color: #FF8E13 !important;
+  border-bottom: 2px solid #FF8E13;
+  padding-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+/* DESIGN.md §4: Ambient Shadow = Orange Glow */
+.shadow-ambient {
+  box-shadow: 0 0 32px 0 rgba(255, 140, 0, 0.10); 
+}
+
+/* DESIGN.md §4: Ghost Border fallback */
+.border-ghost {
+  border: 1px solid rgba(72, 72, 71, 0.15);
+  /* outline-variant @ 15% */
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
