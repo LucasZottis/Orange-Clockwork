@@ -36,3 +36,12 @@
     line-height: 1;
     font-weight: 700;
 }
+
+.btn-pomodoro {
+    /* background: linear-gradient(135deg, #903233, #af4949); */
+    background: linear-gradient(135deg, var(--color-inverse-primary), var(--color-primary));
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    box-shadow: 0 0 40px rgba(144, 50, 51, 0.35);
+}
