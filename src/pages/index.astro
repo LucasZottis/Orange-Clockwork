@@ -1,9 +1,559 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-return Astro.redirect(`${import.meta.env.BASE_URL}pomodoro`);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
 
-<!-- <Layout title="Pomodoro" activePage="pomodoro">
-    <div>TEste</div>
-</Layout> -->
+<Layout title="Início" activePage="home">
+  <!-- HERO SECTION -->
+  <section
+    class="relative overflow-hidden flex flex-col items-center justify-center text-center px-6 py-32"
+    style="background: linear-gradient(180deg, #150c0c 0%, #1a1111 100%); min-height: 90vh;"
+  >
+    <!-- Background decorative blurs -->
+    <div
+      class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
+      style="background-color: rgba(144,50,51,0.2);"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
+      style="background-color: rgba(35,93,41,0.1);"
+    >
+    </div>
+
+    <!-- Tag badge -->
+    <div
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
+      style="background-color: rgba(144,50,51,0.15); border: 1px solid rgba(175,73,73,0.3);"
+    >
+      <span
+        class="material-symbols-outlined"
+        style="color: #af4949; font-size: 1rem;">schedule</span
+      >
+      <span
+        class="text-xs font-bold uppercase tracking-widest"
+        style="font-family: 'Space Grotesk', sans-serif; color: #ffb3b0;"
+        >Gerenciador de Tempo</span
+      >
+    </div>
+
+    <!-- Brand / Hero text -->
+    <h1
+      class="mb-6"
+      style="font-family: 'Newsreader', serif; font-style: italic; font-size: clamp(3.5rem, 10vw, 8rem); color: #f1dedd; line-height: 1; font-weight: 700;"
+    >
+      Chronos Focus
+    </h1>
+
+    <!-- Tagline -->
+    <p
+      class="mb-4 max-w-2xl"
+      style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.1rem, 3vw, 1.75rem); color: rgba(241,222,221,0.9); font-weight: 600;"
+    >
+      Domine seu tempo. Mantenha o foco.
+    </p>
+
+    <!-- Subtitle -->
+    <p
+      class="mb-12 max-w-xl"
+      style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(241,222,221,0.5); line-height: 1.75;"
+    >
+      Três ferramentas de produtividade integradas para você trabalhar com mais
+      eficiência e nunca mais perder o controle do seu tempo.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a
+        href={`${base}pomodoro`}
+        class="flex items-center gap-3 px-8 py-4 rounded-full font-bold transition-all hover:scale-105 active:scale-95"
+        style="background: linear-gradient(135deg, #903233, #af4949); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; box-shadow: 0 0 40px rgba(144,50,51,0.35);"
+      >
+        <span
+          class="material-symbols-outlined"
+          style="font-variation-settings: 'FILL' 1;">timer</span
+        >
+        Começar com Pomodoro
+      </a>
+      <a
+        href={`${base}stopwatch`}
+        class="flex items-center gap-3 px-8 py-4 rounded-full font-medium transition-all hover:scale-105 active:scale-95"
+        style="background-color: rgba(241,222,221,0.08); color: rgba(241,222,221,0.8); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; border: 1px solid rgba(241,222,221,0.15);"
+      >
+        <span class="material-symbols-outlined">stopwatch</span>
+        Ver Cronômetro
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div
+      class="absolute bottom-8 flex flex-col items-center gap-1"
+      style="color: rgba(241,222,221,0.25);"
+    >
+      <span
+        class="text-[10px] tracking-widest uppercase"
+        style="font-family: 'Space Grotesk', sans-serif;">Explorar</span
+      >
+      <span class="material-symbols-outlined animate-bounce">expand_more</span>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="px-6 md:px-12 py-24" style="background-color: #f9f9fe;">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em]"
+          style="font-family: 'Space Grotesk', sans-serif; color: #903233;"
+          >Funcionalidades</span
+        >
+        <h2
+          class="mt-3 font-bold tracking-tight"
+          style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f; font-size: clamp(2rem, 5vw, 3rem);"
+        >
+          Três Ferramentas.<br />Uma Missão.
+        </h2>
+        <p
+          class="mt-4 max-w-lg mx-auto"
+          style="font-family: 'Inter', sans-serif; color: #564241; font-size: 1rem; line-height: 1.75;"
+        >
+          Cada ferramenta foi desenhada para uma necessidade específica de
+          gestão de tempo, com uma interface limpa e sem distrações.
+        </p>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- Pomodoro Card — Featured (dark, large) -->
+        <div
+          class="md:col-span-7 p-8 rounded-[32px] relative overflow-hidden flex flex-col"
+          style="background: linear-gradient(135deg, #150c0c 0%, #2a1010 100%); min-height: 440px;"
+        >
+          <!-- Decorative ring -->
+          <div
+            class="absolute -right-16 -bottom-16 opacity-10 pointer-events-none"
+          >
+            <svg width="220" height="220" viewBox="0 0 220 220">
+              <circle
+                cx="110"
+                cy="110"
+                r="100"
+                fill="none"
+                stroke="#af4949"
+                stroke-width="1.5"
+                stroke-dasharray="6 4"></circle>
+              <circle
+                cx="110"
+                cy="110"
+                r="72"
+                fill="none"
+                stroke="#af4949"
+                stroke-width="1"
+                stroke-dasharray="3 5"></circle>
+              <circle cx="110" cy="110" r="8" fill="#af4949"></circle>
+              <line
+                x1="110"
+                y1="110"
+                x2="110"
+                y2="22"
+                stroke="#af4949"
+                stroke-width="2.5"
+                stroke-linecap="round"></line>
+              <line
+                x1="110"
+                y1="110"
+                x2="162"
+                y2="110"
+                stroke="#af4949"
+                stroke-width="1.5"
+                stroke-linecap="round"></line>
+            </svg>
+          </div>
+
+          <span
+            class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4"
+            style="font-family: 'Space Grotesk', sans-serif; color: rgba(255,179,176,0.5);"
+            >Técnica de Foco</span
+          >
+
+          <div
+            class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
+            style="background-color: rgba(144,50,51,0.3);"
+          >
+            <span
+              class="material-symbols-outlined text-3xl"
+              style="color: #ffb3b0; font-variation-settings: 'FILL' 1;"
+              >timer</span
+            >
+          </div>
+
+          <h3
+            class="text-3xl font-bold mb-3"
+            style="font-family: 'Plus Jakarta Sans', sans-serif; color: #f1dedd;"
+          >
+            Pomodoro
+          </h3>
+
+          <p
+            class="mb-6 flex-1"
+            style="font-family: 'Inter', sans-serif; color: rgba(241,222,221,0.55); font-size: 0.9rem; line-height: 1.75;"
+          >
+            A técnica de produtividade mais eficaz do mundo. Ciclos de foco
+            profundo intercalados com pausas estratégicas para maximizar seu
+            rendimento.
+          </p>
+
+          <ul class="space-y-2 mb-8">
+            {
+              [
+                "25 min de foco + pausas programadas",
+                "Rastreamento de sessões do dia",
+                "Gestão de tarefa atual",
+                "Avanço automático entre modos",
+              ].map((f) => (
+                <li class="flex items-center gap-3">
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #97d694; font-size: 1rem; font-variation-settings: 'FILL' 1;"
+                  >
+                    check_circle
+                  </span>
+                  <span style="font-family: 'Inter', sans-serif; color: rgba(241,222,221,0.65); font-size: 0.85rem;">
+                    {f}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <a
+            href={`${base}pomodoro`}
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold w-fit transition-all hover:scale-105 active:scale-95"
+            style="background: linear-gradient(135deg, #903233, #af4949); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem;"
+          >
+            Abrir Pomodoro
+            <span class="material-symbols-outlined" style="font-size: 1rem;"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+
+        <!-- Stopwatch Card -->
+        <div
+          class="md:col-span-5 p-8 rounded-[32px] flex flex-col"
+          style="background-color: #f3f3f8; min-height: 440px;"
+        >
+          <span
+            class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4"
+            style="font-family: 'Space Grotesk', sans-serif; color: #564241;"
+            >Medição de Tempo</span
+          >
+
+          <div
+            class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
+            style="background-color: rgba(76,97,108,0.12);"
+          >
+            <span
+              class="material-symbols-outlined text-3xl"
+              style="color: #4c616c; font-variation-settings: 'FILL' 1;"
+              >stopwatch</span
+            >
+          </div>
+
+          <h3
+            class="text-3xl font-bold mb-3"
+            style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;"
+          >
+            Cronômetro
+          </h3>
+
+          <p
+            class="mb-6 flex-1"
+            style="font-family: 'Inter', sans-serif; color: #564241; font-size: 0.9rem; line-height: 1.75;"
+          >
+            Precisão de centésimos de segundo com registro de voltas e
+            estatísticas detalhadas para análise de desempenho.
+          </p>
+
+          <ul class="space-y-2 mb-8">
+            {
+              [
+                "Precisão em centésimos de segundo",
+                "Registro e histórico de voltas",
+                "Estatísticas de melhor e última volta",
+              ].map((f) => (
+                <li class="flex items-center gap-3">
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #235d29; font-size: 1rem; font-variation-settings: 'FILL' 1;"
+                  >
+                    check_circle
+                  </span>
+                  <span style="font-family: 'Inter', sans-serif; color: #564241; font-size: 0.85rem;">
+                    {f}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <a
+            href={`${base}stopwatch`}
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold w-fit transition-all hover:scale-105 active:scale-95"
+            style="background-color: #191c1f; color: #f9f9fe; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem;"
+          >
+            Abrir Cronômetro
+            <span class="material-symbols-outlined" style="font-size: 1rem;"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+
+        <!-- Countdown Card — Full Width -->
+        <div
+          class="md:col-span-12 p-8 rounded-[32px] flex flex-col md:flex-row items-start gap-8 md:gap-16"
+          style="background-color: #ededf2;"
+        >
+          <!-- Left -->
+          <div class="flex-1 flex flex-col">
+            <span
+              class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4"
+              style="font-family: 'Space Grotesk', sans-serif; color: #564241;"
+              >Temporizador</span
+            >
+
+            <div
+              class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
+              style="background-color: rgba(35,93,41,0.1);"
+            >
+              <span
+                class="material-symbols-outlined text-3xl"
+                style="color: #235d29; font-variation-settings: 'FILL' 1;"
+                >hourglass_bottom</span
+              >
+            </div>
+
+            <h3
+              class="text-3xl font-bold mb-3"
+              style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;"
+            >
+              Contagem Regressiva
+            </h3>
+
+            <p
+              style="font-family: 'Inter', sans-serif; color: #564241; font-size: 0.9rem; line-height: 1.75; max-width: 38rem;"
+            >
+              Defina um tempo personalizado ou escolha entre presets rápidos.
+              Sons de alarme gerados proceduralmente avisam quando o tempo
+              esgota.
+            </p>
+          </div>
+
+          <!-- Right -->
+          <div class="flex flex-col gap-6 md:w-80 shrink-0">
+            <ul class="space-y-2">
+              {
+                [
+                  "Tempo personalizado (HH:MM:SS)",
+                  "Presets rápidos: 15, 25, 45 e 90 min",
+                  "3 tons de alarme distintos",
+                  "Sons gerados via Web Audio API",
+                ].map((f) => (
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined"
+                      style="color: #235d29; font-size: 1rem; font-variation-settings: 'FILL' 1;"
+                    >
+                      check_circle
+                    </span>
+                    <span style="font-family: 'Inter', sans-serif; color: #564241; font-size: 0.85rem;">
+                      {f}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <a
+              href={`${base}countdown`}
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold w-fit transition-all hover:scale-105 active:scale-95"
+              style="background-color: #235d29; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem;"
+            >
+              Abrir Contagem Regressiva
+              <span class="material-symbols-outlined" style="font-size: 1rem;"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="px-6 md:px-12 py-24" style="background-color: #f3f3f8;">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em]"
+          style="font-family: 'Space Grotesk', sans-serif; color: #903233;"
+          >Como Funciona</span
+        >
+        <h2
+          class="mt-3 font-bold tracking-tight"
+          style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f; font-size: clamp(2rem, 5vw, 3rem);"
+        >
+          A Técnica Pomodoro
+        </h2>
+        <p
+          class="mt-4 max-w-lg mx-auto"
+          style="font-family: 'Inter', sans-serif; color: #564241; font-size: 1rem; line-height: 1.75;"
+        >
+          Desenvolvida por Francesco Cirillo nos anos 80, esta técnica usa
+          intervalos de tempo para melhorar foco e produtividade de forma
+          sustentável.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {
+          [
+            {
+              icon: "task_alt",
+              step: "01",
+              title: "Defina a Tarefa",
+              desc: "Escolha o que você vai trabalhar durante a sessão e escreva no campo de foco.",
+              color: "#903233",
+              bg: "rgba(144,50,51,0.08)",
+            },
+            {
+              icon: "timer",
+              step: "02",
+              title: "Trabalhe 25 min",
+              desc: "Concentre-se completamente na tarefa por 25 minutos sem interrupções.",
+              color: "#903233",
+              bg: "rgba(144,50,51,0.08)",
+            },
+            {
+              icon: "coffee",
+              step: "03",
+              title: "Pausa de 5 min",
+              desc: "Faça uma pausa curta para descansar a mente. Levante, alongue, respire.",
+              color: "#235d29",
+              bg: "rgba(35,93,41,0.08)",
+            },
+            {
+              icon: "self_improvement",
+              step: "04",
+              title: "Pausa Longa",
+              desc: "A cada 4 pomodoros, faça uma pausa de 15 minutos para recuperação completa.",
+              color: "#235d29",
+              bg: "rgba(35,93,41,0.08)",
+            },
+          ].map((item) => (
+            <div
+              class="p-6 rounded-[24px] flex flex-col"
+              style="background-color: #ffffff;"
+            >
+              <div class="flex items-start justify-between mb-4">
+                <div
+                  class="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={`background-color: ${item.bg};`}
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    style={`color: ${item.color}; font-variation-settings: 'FILL' 1;`}
+                  >
+                    {item.icon}
+                  </span>
+                </div>
+                <span
+                  class="text-4xl font-bold"
+                  style={`font-family: 'Plus Jakarta Sans', sans-serif; color: ${item.color}; opacity: 0.12;`}
+                >
+                  {item.step}
+                </span>
+              </div>
+              <h4
+                class="text-lg font-bold mb-2"
+                style="font-family: 'Plus Jakarta Sans', sans-serif; color: #191c1f;"
+              >
+                {item.title}
+              </h4>
+              <p
+                class="text-sm leading-relaxed"
+                style="font-family: 'Inter', sans-serif; color: #564241;"
+              >
+                {item.desc}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section
+    class="px-6 md:px-12 py-28 text-center relative overflow-hidden"
+    style="background: linear-gradient(180deg, #150c0c 0%, #1a0d0d 100%);"
+  >
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-72 rounded-full blur-[100px] pointer-events-none"
+      style="background-color: rgba(144,50,51,0.2);"
+    >
+    </div>
+
+    <div class="max-w-2xl mx-auto relative z-10">
+      <span
+        class="text-xs font-bold uppercase tracking-[0.2em]"
+        style="font-family: 'Space Grotesk', sans-serif; color: rgba(255,179,176,0.5);"
+        >Comece Agora</span
+      >
+      <h2
+        class="mt-4 mb-4 font-bold tracking-tight"
+        style="font-family: 'Plus Jakarta Sans', sans-serif; color: #f1dedd; font-size: clamp(1.75rem, 5vw, 3rem);"
+      >
+        Seu tempo é o seu recurso mais valioso.
+      </h2>
+      <p
+        class="mb-10"
+        style="font-family: 'Inter', sans-serif; color: rgba(241,222,221,0.45); font-size: 1rem; line-height: 1.75;"
+      >
+        Escolha uma ferramenta e comece a trabalhar com mais foco e intenção a
+        partir de agora.
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href={`${base}pomodoro`}
+          class="flex items-center gap-3 px-8 py-4 rounded-full font-bold transition-all hover:scale-105 active:scale-95"
+          style="background: linear-gradient(135deg, #903233, #af4949); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; box-shadow: 0 0 40px rgba(144,50,51,0.35);"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: 'FILL' 1;">timer</span
+          >
+          Iniciar Pomodoro
+        </a>
+        <a
+          href={`${base}stopwatch`}
+          class="flex items-center gap-3 px-8 py-4 rounded-full font-medium transition-all hover:scale-105 active:scale-95"
+          style="background-color: rgba(241,222,221,0.08); color: rgba(241,222,221,0.7); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; border: 1px solid rgba(241,222,221,0.12);"
+        >
+          <span class="material-symbols-outlined">stopwatch</span>
+          Cronômetro
+        </a>
+        <a
+          href={`${base}countdown`}
+          class="flex items-center gap-3 px-8 py-4 rounded-full font-medium transition-all hover:scale-105 active:scale-95"
+          style="background-color: rgba(241,222,221,0.08); color: rgba(241,222,221,0.7); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; border: 1px solid rgba(241,222,221,0.12);"
+        >
+          <span class="material-symbols-outlined">hourglass_bottom</span>
+          Contagem Regressiva
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
