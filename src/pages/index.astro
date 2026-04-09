@@ -3,47 +3,37 @@ import Layout from "../layouts/Layout.astro";
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
 
+<style>
+  @import "../styles/home.css";
+</style>
+
 <Layout title="Início" activePage="home">
   <!-- HERO SECTION -->
   <section
-    class="relative overflow-hidden flex flex-col items-center justify-center text-center px-6 py-32"
-    style="background: linear-gradient(180deg, #150c0c 0%, #1a1111 100%); min-height: 90vh;"
+    class="hero-section relative overflow-hidden flex flex-col items-center justify-center text-center px-6 py-32"
   >
     <!-- Background decorative blurs -->
     <div
-      class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
-      style="background-color: rgba(144,50,51,0.2);"
+      class="blur-decorative-one absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
     >
     </div>
     <div
-      class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
-      style="background-color: rgba(35,93,41,0.1);"
+      class="blur-decorative-two absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
     >
     </div>
 
     <!-- Tag badge -->
     <div
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
-      style="background-color: rgba(144,50,51,0.15); border: 1px solid rgba(175,73,73,0.3);"
+      class="tag-badge inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
     >
-      <span
-        class="material-symbols-outlined"
-        style="color: #af4949; font-size: 1rem;">schedule</span
-      >
-      <span
-        class="text-xs font-bold uppercase tracking-widest"
-        style="font-family: 'Space Grotesk', sans-serif; color: #ffb3b0;"
+      <span class="tag-badge-icon material-symbols-outlined">schedule</span>
+      <span class="tag-badge-text text-xs font-bold uppercase tracking-widest"
         >Gerenciador de Tempo</span
       >
     </div>
 
     <!-- Brand / Hero text -->
-    <h1
-      class="mb-6"
-      style="font-family: 'Newsreader', serif; font-style: italic; font-size: clamp(3.5rem, 10vw, 8rem); color: #f1dedd; line-height: 1; font-weight: 700;"
-    >
-      Chronos Focus
-    </h1>
+    <h1 class="brand-text mb-6">Orange Clockwork</h1>
 
     <!-- Tagline -->
     <p
