@@ -6,7 +6,7 @@ export interface Props {
 
 const { title, activePage } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const target = base.endsWith('/') ? `${base}pomodoro` : `${base}/pomodoro`;
+const target = `${base}/pomodoro`;
 return Astro.redirect(target);
 ---
 
