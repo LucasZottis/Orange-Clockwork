@@ -1,0 +1,153 @@
+/* ============================================================
+ * Stopwatch Page — Breath Ring & Ambient Glow
+ * DESIGN.md §5: Focus Timer — Breath Ring component
+ * ============================================================ */
+
+.stopwatch-glow {
+    background-color: rgba(255, 140, 0, 0.05);
+    filter: blur(100px);
+}
+
+/* Circular ring container */
+.stopwatch-ring {
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    border-radius: 9999px;
+    box-shadow: 0 0 40px 10px rgba(255, 140, 0, 0.05);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animated pulse overlay (primary-dim → primary gradient per DESIGN.md) */
+.stopwatch-ring-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 3px solid var(--color-primary-dim);
+    opacity: 0.15;
+    transform: scale(1.04);
+}
+
+/* ============================================================
+ * Stopwatch Page — Lap Records Sidebar Card
+ * ============================================================ */
+
+.lap-records-card {
+    background-color: var(--color-surface-container);
+    border-radius: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+
+.lap-records-heading {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+}
+
+.lap-records-subtext {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+    opacity: 0.6;
+    margin-top: 0.25rem;
+}
+
+/* Scrollable lap list */
+.lap-list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding-right: 0.25rem;
+}
+
+.lap-list::-webkit-scrollbar {
+    width: 3px;
+}
+
+.lap-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.lap-list::-webkit-scrollbar-thumb {
+    background: var(--color-outline-variant);
+    border-radius: var(--radius-full);
+}
+
+.lap-list-empty {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+    opacity: 0.5;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* ============================================================
+ * Stopwatch Page — Dynamic Lap Item Inner Elements
+ * (used in JS-generated HTML — must live in CSS, not Tailwind)
+ * ============================================================ */
+
+.lap-index {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+    opacity: 0.4;
+}
+
+.lap-time {
+    font-family: var(--font-headline);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+}
+
+.lap-sublabel {
+    font-family: var(--font-label);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-on-surface-variant);
+    opacity: 0.6;
+}
+
+/* Lap time difference — slower */
+.lap-diff-worse {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-error);
+}
+
+/* Lap time difference — faster or equal */
+.lap-diff-better {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-tertiary);
+}
+
+/* ============================================================
+ * Stopwatch Page — Stats & Clear Laps
+ * ============================================================ */
+
+.stats-value {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    color: var(--color-on-surface);
+}
+
+.stats-label {
+    font-family: var(--font-label);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+}

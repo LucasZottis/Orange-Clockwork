@@ -98,15 +98,19 @@ body {
   line-height: 1.6;
 }
 
+/* ============================================================
+ * Header & Footer
+ * ============================================================ */
+
 .header,
 .footer {
-  background-color: #2F1500;
-  color: #FF8E13;
+  background-color: var(--color-surface-container-low);
+  color: var(--color-primary);
 }
 
 .nav-item {
-  color: rgb(255 245 237 / 0.6);
-  font-family: 'Manrope', sans-serif;
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-manrope);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -114,23 +118,383 @@ body {
 }
 
 .nav-item.active-page {
-  color: #FF8E13 !important;
-  border-bottom: 2px solid #FF8E13;
+  color: var(--color-primary) !important;
+  border-bottom: 2px solid var(--color-primary);
   padding-bottom: 0.25rem;
   font-weight: 700;
 }
 
-/* DESIGN.md §4: Ambient Shadow = Orange Glow */
+/* Brand link in header */
+.brand-link {
+  font-family: var(--font-newsreader);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Mobile menu container */
+.mobile-menu {
+  background-color: var(--color-surface-container);
+}
+
+/* Mobile nav link */
+.mobile-nav-link {
+  font-family: var(--font-manrope);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  color: var(--color-on-surface-variant);
+  text-decoration: none;
+}
+
+.mobile-nav-link.active-page {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Mobile menu toggle button */
+.btn-menu {
+  color: var(--color-on-surface-variant);
+}
+
+/* Footer typography & links */
+.footer-meta {
+  font-family: var(--font-manrope);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-link {
+  color: rgba(232, 230, 227, 0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--color-on-surface);
+}
+
+/* ============================================================
+ * DESIGN.md §4: Ambient Shadow = Orange Glow
+ * ============================================================ */
 .shadow-ambient {
-  box-shadow: 0 0 32px 0 rgba(255, 140, 0, 0.10); 
+  box-shadow: 0 0 32px 0 rgba(255, 140, 0, 0.10);
 }
 
 /* DESIGN.md §4: Ghost Border fallback */
 .border-ghost {
   border: 1px solid rgba(72, 72, 71, 0.15);
-  /* outline-variant @ 15% */
 }
 
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ============================================================
+ * Timer Pages — Mode Switcher
+ * ============================================================ */
+
+.mode-switcher {
+  background-color: var(--color-surface-container);
+  display: inline-flex;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+}
+
+.active-mode {
+  background-color: var(--color-surface-container-highest);
+  color: var(--color-primary) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mode-btn:not(.active-mode) {
+  color: var(--color-on-surface-variant);
+}
+
+.mode-btn:not(.active-mode):hover {
+  background-color: var(--color-surface-container-high);
+}
+
+/* ============================================================
+ * Timer Pages — Display & Ring
+ * ============================================================ */
+
+/* Main timer text */
+.timer-display {
+  font-family: var(--font-headline);
+  color: var(--color-on-surface);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* Colon / separator inside the time */
+.timer-sep {
+  color: var(--color-primary);
+  opacity: 0.4;
+}
+
+/* ============================================================
+ * Timer Pages — Buttons
+ * ============================================================ */
+
+/* Primary CTA (Start / Pause) */
+.btn-start {
+  background: linear-gradient(135deg, var(--color-primary-dim), var(--color-primary));
+  color: var(--color-on-primary);
+  font-family: var(--font-headline);
+  font-weight: 700;
+  box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-start:hover {
+  opacity: 0.9;
+}
+
+/* Icon control buttons (Reset, Lap, Skip, Cancel) */
+.btn-control {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-control:hover {
+  background-color: var(--color-surface-container-highest);
+  transform: scale(1.1);
+}
+
+/* ============================================================
+ * Timer Pages — Info Cards (bento grid)
+ * ============================================================ */
+
+.info-card {
+  background-color: var(--color-surface-container-high);
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+/* ============================================================
+ * Timer Pages — Labels (ultra-small caps)
+ * ============================================================ */
+
+.label-xs {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+
+/* ============================================================
+ * Pomodoro — Session Dots
+ * ============================================================ */
+
+.session-dot {
+  border-color: var(--color-secondary) !important;
+  background-color: transparent !important;
+}
+
+.session-dot.filled {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* ============================================================
+ * Pomodoro — Progress Bar
+ * ============================================================ */
+
+.progress-track {
+  background-color: var(--color-surface-container-highest);
+}
+
+.progress-fill {
+  background-color: var(--color-primary);
+}
+
+/* ============================================================
+ * Stopwatch — Lap Times
+ * ============================================================ */
+
+.lap-badge {
+  color: var(--color-primary);
+  background-color: rgba(255, 140, 0, 0.1);
+  font-family: var(--font-label);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+}
+
+.lap-item {
+  background-color: var(--color-surface-container);
+  border-radius: 1rem;
+}
+
+.lap-item.best {
+  background-color: var(--color-surface-bright);
+  border-left: 4px solid var(--color-primary);
+}
+
+/* Stats card */
+.stats-card {
+  background-color: var(--color-surface-container-high);
+  border-radius: 2rem;
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Clear laps button row */
+.btn-clear {
+  background-color: var(--color-surface-container-high);
+  border-radius: 2rem;
+  padding: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn-clear:hover {
+  background-color: var(--color-surface-container-highest);
+}
+
+/* ============================================================
+ * Countdown — Time Inputs
+ * ============================================================ */
+
+.time-input {
+  font-family: var(--font-headline);
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border-radius: var(--radius-xl);
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem;
+}
+
+.time-input:focus {
+  background-color: var(--color-surface-container-highest);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.input-label {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-secondary);
+}
+
+/* ============================================================
+ * Countdown — Status Badge
+ * ============================================================ */
+
+.status-badge {
+  font-family: var(--font-label);
+  border-radius: var(--radius-full);
+  padding: 0.375rem 1.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.status-badge-ready {
+  color: var(--color-tertiary);
+  background-color: var(--color-tertiary-container);
+  border-color: rgba(255, 227, 147, 0.2);
+}
+
+.status-badge-active {
+  color: var(--color-primary);
+  background-color: rgba(255, 140, 0, 0.1);
+  border-color: rgba(255, 140, 0, 0.2);
+}
+
+.status-badge-paused {
+  color: var(--color-on-surface-variant);
+  background-color: var(--color-surface-container-high);
+  border-color: var(--color-surface-container-highest);
+}
+
+.status-badge-warning {
+  color: var(--color-primary-dim);
+  background-color: rgba(204, 112, 0, 0.1);
+  border-color: rgba(204, 112, 0, 0.2);
+}
+
+.status-badge-error {
+  color: var(--color-error);
+  background-color: var(--color-error-container);
+  border-color: rgba(255, 84, 73, 0.2);
+}
+
+/* ============================================================
+ * Countdown — Settings Cards (right panel)
+ * ============================================================ */
+
+.settings-card {
+  background-color: var(--color-surface-container-high);
+  border-radius: 1.5rem;
+  padding: 2rem;
+}
+
+/* Alarm option buttons */
+.alarm-btn:not(.active-alarm) {
+  color: var(--color-on-surface-variant);
+}
+
+.alarm-btn:not(.active-alarm):hover {
+  background-color: var(--color-surface-container-high);
+}
+
+.active-alarm {
+  background-color: var(--color-surface-container-highest);
+  border-left: 4px solid var(--color-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Preset time buttons */
+.preset-btn {
+  font-family: var(--font-label);
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+  font-weight: 700;
+  transition: background-color 0.15s;
+}
+
+.preset-btn:hover {
+  background-color: var(--color-surface-container-highest);
+}
+
+/* Set Time action button */
+.btn-set-time {
+  background: linear-gradient(135deg, var(--color-primary-dim), var(--color-primary));
+  color: var(--color-on-primary);
+  border-radius: var(--radius-xl);
+  font-family: var(--font-label);
+  font-weight: 600;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-set-time:hover {
+  opacity: 0.9;
+}
+
+.btn-set-time:active {
+  transform: scale(0.95);
 }
