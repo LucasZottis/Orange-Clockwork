@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} - Chronos Focus</title>
+    <title>{title} - Orange Clockwork</title>
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,14 +43,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             Cronômetro
           </a>
           <a
-            href={`${base}pomodoro`}
+            href={`./pomodoro`}
             class="transition-colors duration-300"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'pomodoro' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'pomodoro' ? '700' : '400'}; ${activePage === 'pomodoro' ? 'border-bottom: 2px solid #af4949; padding-bottom: 0.25rem;' : ''}`}
           >
             Pomodoro
           </a>
           <a
-            href={`${base}countdown`}
+            href={`./countdown`}
             class="transition-colors duration-300"
             style={`font-family: 'Manrope', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: ${activePage === 'countdown' ? '#ffb3b0' : 'rgba(241,222,221,0.7)'}; font-weight: ${activePage === 'countdown' ? '700' : '400'}; ${activePage === 'countdown' ? 'border-bottom: 2px solid #af4949; padding-bottom: 0.25rem;' : ''}`}
           >
