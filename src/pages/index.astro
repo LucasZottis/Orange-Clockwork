@@ -1,3 +1,9 @@
 ---
-return Astro.redirect(`${import.meta.env.BASE_URL}/pomodoro`);
+import Layout from "../layouts/Layout.astro";
+
+return Astro.redirect(`${import.meta.env.BASE_URL}pomodoro`);
 ---
+
+<!-- <Layout title="Pomodoro" activePage="pomodoro">
+    <div>TEste</div>
+</Layout> -->
