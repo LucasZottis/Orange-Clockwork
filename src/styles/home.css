@@ -1,0 +1,38 @@
+.hero-section {
+    /* background: linear-gradient(180deg, #150c0c 0%, #1a1111 100%); */
+    background: var(--color-surface);
+    min-height: 90vh;
+}
+
+.blur-decorative-one {
+    background-color: rgba(255, 159, 74, 0.2);
+}
+
+.blur-decorative-two {
+    /* background-color: rgba(35, 93, 41, 0.1); */
+    background-color: var(--color-on-primary-container);
+}
+
+.tag-badge {
+    background-color: rgba(255, 140, 0, 0.15);
+    border: 1px solid rgba(204, 112, 0);
+}
+
+.tag-badge-icon {
+    color: var(--color-primary-container);
+    font-size: 1rem;
+}
+
+.tag-badge-text {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--color-primary);
+}
+
+.brand-text {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    color: var(--color-primary-dim);
+    line-height: 1;
+    font-weight: 700;
+}
