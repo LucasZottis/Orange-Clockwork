@@ -6,6 +6,7 @@ export interface Props {
 
 const { title, activePage } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -107,7 +108,7 @@ const base = import.meta.env.BASE_URL;
         </div> -->
         <p class="footer-link">
           <!-- © 2024 Chronos Focus. The Obsidian Gallery. -->
-          © 2026 Orange Clockwork
+          © {currentYear} Orange Clockwork
         </p>
       </div>
     </footer>
