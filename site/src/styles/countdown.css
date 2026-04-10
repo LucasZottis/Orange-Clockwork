@@ -1,0 +1,206 @@
+/* ============================================================
+ * Countdown Page — Styles
+ * ============================================================ */
+
+/* Breath Ring Glow */
+.breath-ring {
+  box-shadow: 0 0 40px 0 rgba(255, 140, 0, 0.1);
+}
+
+/* Slow rotation animation for inner dashed ring */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* ============================================================
+ * Timer Digits — Signature large countdown
+ * ============================================================ */
+
+.countdown-timer-display {
+  font-family: var(--font-headline);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 200;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-on-surface);
+  display: flex;
+  align-items: baseline;
+}
+
+.timer-colon {
+  color: var(--color-primary);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  margin: 0 0.05em;
+}
+
+/* ============================================================
+ * Icon — FILL variant (Material Symbols)
+ * ============================================================ */
+
+.icon-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ============================================================
+ * Countdown — Atmosphere background glow
+ * ============================================================ */
+
+.countdown-atmosphere {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 140, 0, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ============================================================
+ * Countdown — Alarm option buttons
+ * ============================================================ */
+
+.alarm-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  color: var(--color-on-surface-variant);
+  transition: background-color 0.15s;
+}
+
+.alarm-btn:hover {
+  background-color: var(--color-surface-container-high);
+}
+
+.alarm-btn.active-alarm {
+  background-color: var(--color-surface-container-highest);
+  border-left: 4px solid var(--color-primary);
+  color: var(--color-on-surface);
+}
+
+.alarm-check {
+  color: var(--color-primary);
+}
+
+.alarm-play {
+  color: var(--color-outline-variant);
+}
+
+/* ============================================================
+ * Countdown — Preset buttons
+ * ============================================================ */
+
+.preset-btn {
+  background-color: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.15s;
+}
+
+.preset-btn:hover {
+  background-color: var(--color-surface-bright);
+}
+
+/* ============================================================
+ * Countdown — Recent Sprints section
+ * ============================================================ */
+
+.sprint-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.sprint-item:hover {
+  background-color: var(--color-surface-bright);
+}
+
+.sprint-icon-wrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 140, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sprint-icon {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.sprint-status {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-tertiary);
+}
+
+/* ============================================================
+ * Countdown — Achievement card
+ * ============================================================ */
+
+.achievement-card {
+  background-color: var(--color-primary-container);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-on-primary-container);
+}
+
+.achievement-icon {
+  font-size: 2.5rem;
+  color: var(--color-on-primary-container);
+}
+
+.achievement-btn {
+  background-color: var(--color-on-primary-container);
+  color: var(--color-primary-container);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 0.875rem;
+  align-self: flex-start;
+  margin-top: 1.5rem;
+  transition: opacity 0.15s;
+}
+
+.achievement-btn:hover {
+  opacity: 0.9;
+}
+
+/* ============================================================
+ * Countdown — Number input: remove spin buttons
+ * ============================================================ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
