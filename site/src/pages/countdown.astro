@@ -15,10 +15,10 @@ import '../styles/countdown.css';
         <!-- Header -->
         <div>
           <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">
-            Configuration
+            Configuração
           </span>
           <h1 class="text-4xl font-extrabold tracking-tight text-on-surface">
-            Time Setup
+            Tempo
           </h1>
         </div>
 
@@ -28,7 +28,7 @@ import '../styles/countdown.css';
           <!-- Manual Entry -->
           <div class="space-y-4">
             <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-              Manual Entry
+              Entrada Manual
             </label>
             <div class="flex items-center gap-3">
 
@@ -40,7 +40,7 @@ import '../styles/countdown.css';
                   value="0"
                   placeholder="00"
                 />
-                <span class="input-label block mt-1 px-1">Hours</span>
+                <span class="input-label block mt-1 px-1">Horas</span>
               </div>
 
               <span class="text-2xl font-bold text-outline-variant">:</span>
@@ -53,7 +53,7 @@ import '../styles/countdown.css';
                   value="25"
                   placeholder="25"
                 />
-                <span class="input-label block mt-1 px-1">Minutes</span>
+                <span class="input-label block mt-1 px-1">Minutos</span>
               </div>
 
               <span class="text-2xl font-bold text-outline-variant">:</span>
@@ -66,7 +66,7 @@ import '../styles/countdown.css';
                   value="0"
                   placeholder="00"
                 />
-                <span class="input-label block mt-1 px-1">Seconds</span>
+                <span class="input-label block mt-1 px-1">Segundos</span>
               </div>
 
             </div>
@@ -75,7 +75,7 @@ import '../styles/countdown.css';
           <!-- Presets -->
           <div class="space-y-4">
             <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-              Presets
+              Predefinições
             </label>
             <div class="grid grid-cols-2 gap-3">
               <button class="preset-btn" data-seconds="900">15:00</button>
@@ -88,7 +88,7 @@ import '../styles/countdown.css';
           <!-- Alarm Tone -->
           <div class="space-y-4 pt-2">
             <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-              Alarm Tone
+              Tom de Alarme
             </label>
             <div class="flex flex-col gap-2">
 
@@ -121,21 +121,6 @@ import '../styles/countdown.css';
 
         </div>
 
-        <!-- Late Night Edge Card -->
-        <div class="bg-surface-container-high p-6 rounded-xl border-l-4 border-primary">
-          <div class="flex items-start gap-4">
-            <div class="p-3 bg-primary/10 rounded-lg flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">auto_awesome</span>
-            </div>
-            <div>
-              <h3 class="font-bold text-on-surface">Late Night Edge</h3>
-              <p class="text-sm text-on-surface-variant mt-1 leading-relaxed">
-                Deep focus sessions are 24% more effective between 10 PM and 2 AM.
-              </p>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <!-- ── Right Column: Signature Timer ── -->
@@ -155,7 +140,7 @@ import '../styles/countdown.css';
           <!-- Time + Stats -->
           <div class="relative">
             <span class="text-primary font-manrope text-sm uppercase tracking-[0.3em] font-bold block mb-4">
-              Time Remaining
+              Tempo Restante
             </span>
 
             <div id="timer-display" class="countdown-timer-display justify-center">
@@ -167,15 +152,15 @@ import '../styles/countdown.css';
             <div class="flex justify-center gap-12 mt-8">
               <div class="text-center">
                 <span id="stat-sessions" class="block text-3xl font-bold">00</span>
-                <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Sessions</span>
+                <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Sessões</span>
               </div>
               <div class="text-center">
                 <span id="stat-minutes" class="block text-3xl font-bold text-tertiary">000</span>
-                <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Minutes</span>
+                <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Minutos</span>
               </div>
               <div class="text-center">
                 <span id="stat-streak" class="block text-3xl font-bold">00</span>
-                <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Streaks</span>
+                <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Sequências</span>
               </div>
             </div>
           </div>
@@ -217,69 +202,6 @@ import '../styles/countdown.css';
         </div>
 
       </div>
-    </div>
-
-    <!-- ── Recent Focused Sprints + Achievement ── -->
-    <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <!-- Recent Sprints -->
-      <div class="md:col-span-2 bg-surface-container rounded-2xl p-8">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-xl font-bold">Recent Focused Sprints</h2>
-          <span class="text-xs font-bold text-primary uppercase tracking-widest cursor-pointer hover:underline">
-            View All
-          </span>
-        </div>
-
-        <div class="space-y-4">
-
-          <div class="sprint-item">
-            <div class="flex items-center gap-4">
-              <div class="sprint-icon-wrap">
-                <span class="material-symbols-outlined sprint-icon">history</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-sm">Deep Work Session</h4>
-                <p class="text-xs text-on-surface-variant">Completed 2 hours ago</p>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="font-bold">45:00</span>
-              <span class="sprint-status">Success</span>
-            </div>
-          </div>
-
-          <div class="sprint-item">
-            <div class="flex items-center gap-4">
-              <div class="sprint-icon-wrap">
-                <span class="material-symbols-outlined sprint-icon">history</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-sm">Design Review</h4>
-                <p class="text-xs text-on-surface-variant">Completed Yesterday</p>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="font-bold">25:00</span>
-              <span class="sprint-status">Success</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Achievement Card -->
-      <div class="achievement-card">
-        <span class="material-symbols-outlined achievement-icon">military_tech</span>
-        <div class="mt-auto">
-          <h2 class="text-3xl font-black leading-tight">Nocturnal Master</h2>
-          <p class="text-sm mt-2 opacity-80 font-medium">
-            You've unlocked the 12AM achievement for 7 consecutive days.
-          </p>
-        </div>
-        <button class="achievement-btn">Collect Reward</button>
-      </div>
-
     </div>
 
   </div>
