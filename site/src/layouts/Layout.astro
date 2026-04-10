@@ -1,7 +1,7 @@
 ---
 export interface Props {
   title: string;
-  activePage: 'stopwatch' | 'pomodoro' | 'countdown' | 'home';
+  activePage: "stopwatch" | "pomodoro" | "countdown" | "home";
 }
 
 const { title, activePage } = Astro.props;
@@ -32,9 +32,7 @@ const base = import.meta.env.BASE_URL;
       <div
         class="flex justify-between items-center px-12 w-full max-w-screen-2xl mx-auto h-full"
       >
-        <a href={`${base}`} class="brand-link">
-          Orange Clockwork
-        </a>
+        <a href={`${base}`} class="brand-link"> Orange Clockwork </a>
 
         <nav class="hidden md:flex items-center gap-12">
           <a
@@ -102,13 +100,14 @@ const base = import.meta.env.BASE_URL;
       <div
         class="flex flex-col md:flex-row justify-between items-center px-12 gap-6 w-full max-w-screen-2xl mx-auto footer-meta"
       >
-        <div class="flex gap-8">
+        <!-- <div class="flex gap-8">
           <a href="#" class="footer-link transition-opacity">Política de Privacidade</a>
           <a href="#" class="footer-link transition-opacity">Termos de Serviço</a>
           <a href="#" class="footer-link transition-opacity">Suporte</a>
-        </div>
+        </div> -->
         <p class="footer-link">
-          © 2024 Chronos Focus. The Obsidian Gallery.
+          <!-- © 2024 Chronos Focus. The Obsidian Gallery. -->
+          © 2026 Orange Clockwork
         </p>
       </div>
     </footer>
